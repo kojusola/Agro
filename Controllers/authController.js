@@ -1,18 +1,17 @@
 const user = require("../models/user");
+const Profile = require("../models/profile");
 const passport = require("passport");
+const mongoose = require('mongoose')
 
 
 exports.signup = async (req, res) =>{
         // const role = req.body.role
         // if (role === "farmer"){
+            // user.init()
             const newUser = new user({
                 name: req.body.name,
                 username: req.body.username,
-                role: req.body.role,
-                location: req.body.location,
-                country: req.body.country,
-                address: req.body.address,
-                birthday:req.body.birthday,
+                role: req.body.role
             })
             const createdUser = await user.register(newUser, req.body.password);
             return res.redirect("/auth/login") 
@@ -58,8 +57,13 @@ exports.login = async (req, res, next) => {
                     req.flash("error", "Something went wrong!");
                     return res.redirect("back")
                 } else {
-                    req.flash("success", "Successfully logged In!");
-                    return res.redirect("/")
+                    if (Profile.find({user_id:user._id})){
+                        req.flash("success", "Successfully logged In!");
+                        return res.redirect(`/profile/${user._id}`);
+                    }else {
+                        req.flash("success", "Welcome! Kindly complete your profile");
+                        return res.redirect(`/profile`);
+                    }
                 }
             })
         }

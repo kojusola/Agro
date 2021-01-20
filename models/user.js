@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 const passportLocalMongoose = require("passport-local-mongoose");
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
-const dateFormat = require("dateformat")
+const dateFormat = require("dateformat");
+const profile = require("./profile");
 
 var options = {
     errorMessages: {
@@ -30,46 +31,14 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         trim: true
     },
-    birthday:{
-        type: String,
-        required:[true, 'Birthday is required']
-    },
-    address:{
-        type: String,
-        required:[true, 'address is required']
-    },
-    country:{
-        type: String,
-        required: [true, 'location is required'],
-        trim: true
-    },
     role: {
         type: String,
-        trim:true
-    },
-    phone:{
-        type: String,
-        trim:true
+        trim:true,
+        required:[true, 'Role is required']
     },
     password: {
         type: String,
         select: false
-    },
-    interests:{
-        type:String
-    },
-    profileimage:{
-        type: Object,
-        "avatar":{
-            type:String
-        },
-        "cloundinary_id":{
-            type:String
-        }
-    },
-    status:{
-        type: String,
-        default: "pending"
     },
     joined:{
         type: String,
