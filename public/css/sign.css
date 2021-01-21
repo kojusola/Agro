@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Raleway:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital@1&display=swap');
+
+
+.body1{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-size: small !important;
+    height: 100vh;
+    display: flex;
+}
+
+.signupform{
+    margin: 60px auto;
+    border: 2px solid #6c757d;
+    padding: 10px 100px;
+    align-items: center;
+    text-align: center;
+    border-radius: 18px;
+    box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.19);
+}
+
+.signinform{
+    margin: 160px auto;
+    border: 2px solid #6c757d;
+    padding: 20px 100px;
+    align-items: center;
+    text-align: center;
+    border-radius: 18px;
+    box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.19);
+}
+
+.signupform input, .signinform input{
+    width: 350px;
+    height: 45px;
+    border: 1px solid #6c757d;
+    border-radius: 3px;
+    margin: 15px auto;
+    text-align: center;
+}
+.signupform select{
+    width: 356px;
+    height: 45px;
+    border: 1px solid #6c757d;
+    border-radius: 3px;
+    margin: 15px auto;
+    text-align: center;
+}
+.signupform h1{
+    font-family: 'Raleway', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #2c5f2c;
+}
+.signupform h2{
+    font-family: 'Raleway', sans-serif;
+    font-size: 27px;
+    font-weight: 700;
+    color: #97bc62ff;
+}
+.signinform h2{
+    font-family: 'Raleway', sans-serif;
+    font-size: 35px;
+    font-weight: 700;
+    color: #2c5f2c;
+}
+.signupform button,.signinform button{
+    width: 356px;
+    height: 45px;
+    margin-top: 20px;
+    border: 1px solid #2c5f2c;
+    border-radius: 3px;
+    border: 0 solid rgba(0,0,0,0.19);
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    background-color: #97bc62ff;
+    color: #2c5f2c;
+}
+.signupform input::placeholder,.signinform input::placeholder{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+}
+#button:hover{
+    background-color: #2c5f2c;
+    color: #97bc62ff;
+}
+#question {
+    font-size: 15px;
+}
+#question a{
+    text-decoration: none;
+    color: #2c5f2c;
+    font-weight: 600;
+}
+.signupform select #options{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+}
+.signupform select {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+}
+
+@media screen and (max-width:1450px) and (min-width:1300px){
+    .signinform{
+        margin: 100px auto;
+    }
+    .signupform{
+        margin: 30px auto;
+    }
+    .signupform input{
+        margin: 5px auto;
+    }
+}
+
+@media screen and (max-width:1300px) and (min-width:600px){
+    #signinimage {
+       height:0;
+    }
+    .signinform{
+        margin: 60px auto;
+    }
+    .signupform{
+        margin: 35px auto;
+    }
+    .signupform input{
+        margin: 5px auto;
+    }
+}
+
+@media screen and (max-width:600px){
+    #signinimage {
+        height: 0;
+    }
+    .signinform{
+        margin: 140px auto;
+        padding: 20px 60px;
+    }
+    .signupform{
+        margin: 40px auto;
+        padding: 30px 30px;
+    }
+    .signupform h2, .signinform h2{
+        font-size: 20px;
+    }
+    .signupform h1{
+        font-size: 24px;
+    }
+    .signupform input{
+        width: 200px;
+        height: 40px;
+        margin: 5px;
+    }
+    .signinform input{
+        width: 300px;
+        height: 40px;
+        margin: 5px;
+    }
+    .signupform select{
+        width: 206px;
+        height: 40px;
+        margin: 5px;
+    }
+    .signupform button, .signinform button{
+        width: 200px;
+        height: 40px;
+    }
+}
