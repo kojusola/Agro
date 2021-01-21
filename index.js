@@ -13,7 +13,9 @@ const MongoStore = require("connect-mongo")(session);
 
 const app = express();
 
-app.use(express.json());
+// app.use(express.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 // authentication and authorization with passport
 
 app.use(
@@ -60,7 +62,7 @@ app.use(function(req, res, next){
 
 
 //view engine setup
-app.engine("hbs", hbs({extname: "hbs", defaultLayout: "layout", layoutsDir: __dirname + "/views/layouts/"}));
+app.engine("hbs", hbs({extname: "hbs", defaultLayout: "index", layoutsDir: __dirname + "/views/layouts/"}));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 

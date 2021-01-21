@@ -4,6 +4,16 @@ const passport = require("passport");
 const mongoose = require('mongoose')
 
 
+
+exports.userLoginForm = (req, res) => {
+    res.render('signin.hbs')
+}
+
+exports.userSignupForm = (req, res) => {
+    res.render('signup.hbs')
+}
+
+
 exports.signup = async (req, res) =>{
         // const role = req.body.role
         // if (role === "farmer"){
