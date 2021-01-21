@@ -14,9 +14,9 @@ const userProfileSchema = new mongoose.Schema({
         type: String,
         required:[true, 'address is required']
     },
-    country:{
+    state:{
         type: String,
-        required: [true, 'location is required'],
+        required: [true, 'state is required'],
         trim: true
     },
     phone:{

@@ -2,13 +2,15 @@ require('dotenv').config()
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
-const hbs = require("express-handlebars");
+const expbs = require("express-handlebars");
+const Handlebars = require('handlebars')
 const flash = require("connect-flash")
 const fs = require('fs')
 const passport = require("passport")
 const mongoose = require("mongoose")
 const session = require("express-session")
 const MongoStore = require("connect-mongo")(session);
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
 
 const app = express();
@@ -20,7 +22,7 @@ app.use(bodyParser.json());
 
 app.use(
 	session({
-	  secret:"SECRET",
+	  secret: process.env.SESSION_SECRET,
 	  resave: false,
 	  saveUninitialized: false,
 	  cookie: { secure: false },
@@ -37,14 +39,17 @@ app.use(flash());
 //import routes
 const authRouter = require("./routes/authRouter")
 const profileRouter = require("./routes/profileRouter")
+const farmerRouter = require("./routes/farmerRouter")
 
 
 app.use('/auth', authRouter)
 app.use('/profile', profileRouter)
+app.use('/farmers', farmerRouter)
 
 
 //database connection
-const db = require("./connection")
+const db = require("./connection");
+const router = require('./routes/authRouter');
 db.db()
 
 //middlewares
@@ -62,10 +67,38 @@ app.use(function(req, res, next){
 
 
 //view engine setup
-app.engine("hbs", hbs({extname: "hbs", defaultLayout: "index", layoutsDir: __dirname + "/views/layouts/"}));
+const hbs = expbs.create({
+	extname: "hbs", 
+	defaultLayout: "index", 
+	layoutsDir: __dirname + "/views/layouts/",
+	handlebars: allowInsecurePrototypeAccess(Handlebars),
+	helpers:{
+		diff: function(a, b){
+			return a - b
+		},
+		equal: function(a, b){
+			return a === b
+		}
+	}
+})
+app.engine("hbs", hbs.engine);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
+// Register Partials
+const partialsDir = path.join(__dirname, 'views', 'partials');
+const filenames = fs.readdirSync(partialsDir);
+
+
+filenames.forEach(async (filename) => {
+  const matches = /^([^.]+).hbs$/.exec(filename);
+  if (!matches) {
+    return;
+  }
+  const name = matches[1];
+  const template = fs.readFileSync(path.join(partialsDir, filename), 'utf8');
+  Handlebars.registerPartial(name, template);
+});
 
 
 

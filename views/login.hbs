@@ -1,0 +1,42 @@
+<div class="row full-height">
+    <div class="col-md-7 login-left"></div>
+    <div class="col-md-5 centered">
+        <div class="container">
+            <h1 class="text-center">LOG IN</h1>
+            <br><br>
+            <form class="container">
+                <div class="mb-3">
+                    <label for="validationDefaultUsername">Email</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control" id="validationDefaultUsername"
+                            placeholder="email address" aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="validationDefault00">Account Password</label>
+                    <input type="passowrd" class="form-control" id="validationDefault00"
+                        placeholder="Provide password for your account" required>
+                </div>
+                <div class="form-group">
+                    <label for="cat">Login as</label>
+                    <select class="browser-default custom-select" id="identity" name="category">
+                        <option value="farmer">Farmer</option>
+                        <option value="investor">investor</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" type="submit">LOGIN</button>
+            </form>
+            <br>
+            <p class="text-center">No account yet? <a href="/register/farmer">Signup as farmer</a> | <a
+                    href="/register/investor">Signup as
+                    investor</a></p>
+        </div>
+    </div>
+</div>
+<style>
+    .login-left {
+        background-image: url(/img/field.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
