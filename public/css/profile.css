@@ -1,0 +1,235 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Roboto', sans-serif;
+  }
+
+.support{
+    
+    border: 1px solid #fe4c50;
+}
+
+.heading {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-contents{
+    display: grid;
+    width: 50vw;
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: 12px;
+}
+
+.user-information{
+    margin: 12px auto;
+}
+
+.card-container{
+    display: grid;
+    grid-template-areas: "picture details";
+    grid-template-columns: 1fr 2fr;
+}
+
+.details {
+    grid-area: details;
+}
+
+.card-width{
+    width: 21rem;
+}
+
+#profile-picture{
+    border-radius: 50%;
+    width: 6.25rem;
+    height: 6.25rem;
+    object-fit: contain;
+    object-position: center;
+    border: 1px dotted #666;
+}
+
+.card{
+    height: 18vh;
+    margin: 18px;
+}
+
+.card-info{
+    height: auto;
+}
+
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* button {
+    outline: none;
+    background: none;
+    border: none;
+} */
+
+
+.p-t-15 {
+    padding-top: 15px;
+}
+   
+.p-t-10 {
+    padding-top: 10px;
+}
+
+.btn--blue {
+    background: #4272d7;
+}
+  
+.btn--blue:hover {
+    background: #3868cd;
+}
+
+.btn--radius-2 {
+    border-radius: 15px;
+}
+
+.btn {
+    /* display: inline-block; */
+    /* line-height: 50px; */
+    /* padding: 0 50px; */
+    margin: 12px 2px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    font-size: 18px;
+    color: #fff;
+    font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+}
+
+input {
+    outline: none;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    width: 100%;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  
+.input--style-4 {
+    line-height: 50px;
+    background: #fafafa;
+    border-radius: 5px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #666;
+    transition: all 0.4s ease;
+}
+
+.label {
+    font-size: 16px;
+    color: #555;
+    text-transform: capitalize;
+    display: block;
+    margin-bottom: 5px;
+}
+  
+.radio-container {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #666;
+    user-select: none;
+}
+  
+.radio-container input {
+    opacity: 0;
+    cursor: pointer;
+}
+
+.input-group {
+    margin-bottom: 22px;
+    width: 100%;
+  }
+
+.col {
+    width: 100%;
+}
+
+.user-img{
+    width: auto;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.user-card{
+    height: auto;
+}
+.user-posts{
+    height: auto;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+.message-area{
+    margin: auto;
+    width: 100%;
+}
+
+@media only screen and (max-width: 320px) {
+    .design-setting{
+        display: none;
+    }
+
+    .card-container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .details-section{
+        width: 768px;
+    }
+    .details{
+        display: flex;
+        flex-direction: column;
+    }
+  }
+  
