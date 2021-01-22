@@ -1,7 +1,6 @@
 {
   "name": "agro",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -29,5 +28,14 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kojusola/Agro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kojusola/Agro/issues"
+  },
+  "homepage": "https://github.com/kojusola/Agro#readme",
+  "description": ""
 }
