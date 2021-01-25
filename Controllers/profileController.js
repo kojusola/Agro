@@ -5,11 +5,11 @@ const cloudinary = require("../utils/cloudinary");
 
 
 exports.getOneProfile= async(req, res) =>{
-    const userProfile = await Profile.findById({user_id: req.params.id});
-    if(!userProfile){
-        req.flash('error', 'Something went wrong. Try again')
-        return res.redirect('back');
-    }
+    // const userProfile = await Profile.findById({user_id: req.params.id});
+    // if(!userProfile){
+    //     req.flash('error', 'Something went wrong. Try again')
+    //     return res.redirect('back');
+    // }
    return res.render('userSetting.hbs')
 }
 

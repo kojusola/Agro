@@ -45,7 +45,11 @@
                             </div>
                         </div>
                         <div class="col-md-3 centered">
-                            <button type="button" class="btn btn-info justify-content-end update-button">Update</button>
+                            <form action="/" id="pixForm" method="POST" class="display-hidden">
+                                <input type="file" name="profilePix" id="inputFile" onchange="fileSelect()">
+                            </form>
+                            <button type="button" class="btn btn-info justify-content-end update-button"
+                                onclick="fileUpload()">Update</button>
                         </div>
                     </div>
                 </div>
@@ -189,6 +193,12 @@
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
 <script>
+    function fileUpload() {
+        $("#inputFile").click()
+    }
+    function fileSelect() {
+        $("#pixForm").submit()
+    }
     $('#accountSettings').on('click', function () {
         $('#messages').removeClass("active")
         $('#password').removeClass("active")
