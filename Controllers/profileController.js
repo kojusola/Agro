@@ -13,6 +13,8 @@ exports.getOneProfile= async(req, res) =>{
    return res.render('userSetting.hbs')
 }
 
+
+
 exports.getAllProfile= async(req, res) =>{
     const allUsersProfile = await Profile.find();
     if(!allUsersProfile){

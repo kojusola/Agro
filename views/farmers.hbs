@@ -1,50 +1,146 @@
 {{> nav}}
-<section class="farmerBanner">
-    <div class="bg">
-        <div>
-            <h1>Meet a farmer today...</h1><br>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-filter"></i></span>
+<div class="row">
+    <div class="col-md-12" id="main">
+        <section class="farmerBanner">
+            <div class="bg">
+                <div>
+                    <h1>Meet a farmer today...</h1><br>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-filter"></i></span>
+                        </div>
+                        <input type="text" class="form-control bg-transparent" placeholder="Filter by name | location"
+                            aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
                 </div>
-                <input type="text" class="form-control bg-transparent" placeholder="Filter by name | location"
-                    aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-        </div>
 
-    </div>
-</section>
-<section class="container grid-display">
-    <div class="card bg-light" style="width: 18rem;">
-        <i class="fas fa-certificate"></i>
-        <img class="card-img-top"
-            src="https://images.unsplash.com/photo-1560241804-02b7b1bc9d55?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1528&q=80"
-            alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Charles Ugbana</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-            <div class="openbtw">
-                <div class="text-center">
-                    <i class="fas fa-map-marker-alt"></i> <br>
-                    <span>location</span>
-                </div>
-                <div class="text-center">
-                    <i class="fas fa-user"></i> <br>
-                    <span>28</span>
-                </div>
-                <div class="text-center">
-                    <i class="fas fa-map-marked-alt"></i> <br>
-                    <span>Yes</span>
+            </div>
+        </section>
+        <section class="container grid-display">
+            <div class="card bg-light" style="width: 18rem;" onclick="detailss()">
+                <i class="fas fa-certificate"></i>
+                <img class="card-img-top" src="/img/fff.jpeg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Charles Ugbana</h5>
+                    <p class="card-text font-small">Some quick example text to build on the card title and make up the
+                        bulk of the
+                        card's
+                        content.</p>
+                    <div class="openbtw">
+                        <div class="text-center">
+                            <i class="fas fa-map-marker-alt font-small"></i> <br>
+                            <span class="font-small">location</span>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-user font-small"></i> <br>
+                            <span class="font-small">28</span>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-map-marked-alt font-small"></i> <br>
+                            <span class="font-small">Yes</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-</section>
+        </section>
+    </div>
+    <div id="sideview" class="bg-dark display-hidden">
+        <section class="p-1 pt-5 mt-5">
+            <article id="detailsOfFarmer">
+                <div style="position: absolute;right: 20px;top: 70px;color: #ffffffab;z-index: 2;">
+                    <i class="far fa-times-circle cursor" onclick="closeSidebar()"
+                        style="font-size: 20px!important;"></i>
+                </div>
+                <div>
+                    <img src="/img/fff.jpeg" alt="" id="pimage" style="width: 100%; border-radius: 20px">
+                </div><br>
+                <div>
+                    <h3 id="name" class="mine color-white">Charles Ugbana</h3>
+                    <p class="font-smaller">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur,
+                        aliquid
+                        culpa quos
+                        blanditiis quidem quisquam tempore aspernatur
+                        accusamus quis laborum modi non vero dicta, id minus, sequi iste pariatur repellat!</p>
+                </div>
+
+                <div class="openbtw">
+                    <p>Location: State</p>
+                    <p>Phone: 08142381096</p>
+                </div>
+                <div class="openbtw">
+                    <p>Age: 50</p>
+                    <p>Yrs. of Exp.: 40</p>
+                </div>
+                <div>
+                    <p class="font-smaller">Major Produce: Cocoa, Groundnut, Pea</p>
+                </div>
+                <div>
+                    <p class="font-smaller">Lands Owned: 6</p>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-block btn-green" onclick="sendMessage()">Initiate a discuss</button>
+                </div>
+            </article>
+            <article class="display-hidden" id="messagebox">
+                <div class="color-white">
+                    Send Message to <h3 class="mine">Charles Ugbana</h3>
+                </div>
+                <form action="">
+                    <textarea name="message" id="mes" class="w-100 input--style-4" rows="15"></textarea>
+                    <button type="submit" class="btn btn-block btn-green">Send</button>
+                </form>
+                <br><br>
+                <div class="text-right color-white cursor" onclick="back2details()">
+                    Back
+                </div>
+            </article>
+        </section>
+    </div>
+</div>
+{{> footer}}
+<script>
+    function back2details() {
+        $("#detailsOfFarmer").show('slow')
+        $("#messagebox").hide('slow')
+    }
+    function sendMessage() {
+        $("#detailsOfFarmer").hide('slow')
+        $("#messagebox").show('slow')
+    }
+    function detailss() {
+        $("#main").removeClass("col-md-12")
+        $("#main").addClass("col-md-9")
+        $("#sideview").addClass("col-md-3")
+        $("#sideview").removeClass("display-hidden")
+    }
+    function closeSidebar() {
+        $("#main").removeClass("col-md-9")
+        $("#main").addClass("col-md-12")
+        $("#sideview").removeClass("col-md-3")
+        $("#sideview").addClass("display-hidden")
+
+    }
+</script>
 <style>
     * {
         font-size: small !important;
+    }
+
+    #sideview {
+        height: 100vh;
+        position: fixed;
+        right: 0;
+    }
+
+    .col-md-12 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .col-md-9 {
+        margin-right: 2px !important;
+        padding-right: 0 !important;
     }
 
     .grid-display {

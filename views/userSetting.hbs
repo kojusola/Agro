@@ -5,7 +5,7 @@
     }
 </style>
 <br>
-<section class="cover-bg mt-5">
+<section class="cover-bg mt-5 pb-5">
     <section class="container user-page">
         <section class="row">
             <div class="col-md-4 py-4">
@@ -203,25 +203,25 @@
         $('#messages').removeClass("active")
         $('#password').removeClass("active")
         $('#accountSettings').addClass("active")
-        $('#account').show()
-        $('#security').hide()
-        $('#message').hide()
+        $('#account').show('slow')
+        $('#security').hide('slow')
+        $('#message').hide('slow')
 
     })
     $('#password').on('click', function () {
         $('#messages').removeClass("active")
         $('#password').addClass("active")
         $('#accountSettings').removeClass("active")
-        $('#account').hide()
-        $('#security').show()
-        $('#message').hide()
+        $('#account').hide('slow')
+        $('#security').show('slow')
+        $('#message').hide('slow')
     })
     $('#messages').on('click', function () {
         $('#messages').addClass("active")
         $('#password').removeClass("active")
         $('#accountSettings').removeClass("active")
-        $('#account').hide()
-        $('#security').hide()
-        $('#message').show()
+        $('#account').hide('slow')
+        $('#security').hide('slow')
+        $('#message').show('slow')
     })
 </script>

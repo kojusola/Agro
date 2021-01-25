@@ -3,6 +3,7 @@
     margin: 0;
     box-sizing: border-box;
     font-family: 'Poppins', 'Roboto', sans-serif;
+   
   }
 
   .sidebar-nav{
@@ -23,12 +24,43 @@
   h3.mine{
       font-weight: bold;
       font-size: 14px!important;
+      overflow: hidden;
+  }
+  .openbtw{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  .openbtw p{
+      font-size: 10px!important;
+      color: white;
+  }
+  .font-smaller{
+      font-size: 10px!important;
+      color: white;
+  }
+  .font-small{
+    font-size: 11px!important;
+}
+  .color-white{
+      color: white;
+  }
+  .btn-green{
+    color: #fff;
+    background-color: green;
+    border-color: green;
+  }
+  footer{
+      width: 100vw;
   }
   .profile-heading, .user-information{
     box-shadow: 3px 3px #00000026;
     border-radius: 10px;
     margin-bottom: 15px;
     background-color: white;
+}
+h3.mine.profile{
+    font-size: 40px!important;
 }
   .sidebar-nav h3{
       font-weight: bold;
@@ -48,16 +80,20 @@
       align-items: center;
   }
   .cover-bg{
-      background-color: #e9ecef33;
+      background-color: #72727233;
   }
   .input--style-4 {
     background: #fafafa;
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     font-size: 16px;
     color: #666;
     transition: all 0.4s ease;
     border: 2px solid #0000002e;
+    outline: none;
+}
+.cursor{
+    cursor: pointer;
 }
 .input--style-4:focus{
     border: 2px solid #17a2b8;   
@@ -73,6 +109,17 @@
 #message{
     min-height: 50vh;
 }
+.user-img{
+    width: auto;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+
+
+
+
+
 
 
 
@@ -121,23 +168,10 @@
     border: 1px dotted #666;
 }
 
-.card{
-    height: 18vh;
-    margin: 18px;
-}
 
-.card-info{
-    height: auto;
-}
 
-td {
-    padding: 10px;
-    text-align: left;
-}
 
-tr:hover {
-    background-color: #f5f5f5;
-}
+
 
 /* button {
     outline: none;
@@ -214,11 +248,7 @@ input {
     width: 100%;
 }
 
-.user-img{
-    width: auto;
-    object-fit: cover;
-    overflow: hidden;
-}
+
 
 .user-card{
     height: auto;
