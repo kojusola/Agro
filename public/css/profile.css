@@ -5,6 +5,78 @@
     font-family: 'Poppins', 'Roboto', sans-serif;
   }
 
+  .sidebar-nav{
+      box-shadow: 3px 3px #00000026;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      background-color: white;
+  }
+  .sidebar-nav:hover{
+      border: 0.4px solid #17a2b8;
+      box-shadow: 3px 3px #17a2b8;
+  }
+  .sidebar-nav.active{
+    border: 0.4px solid #17a2b8;
+    box-shadow: 3px 3px #17a2b8;
+  }
+  h3.mine{
+      font-weight: bold;
+      font-size: 14px!important;
+  }
+  .profile-heading, .user-information{
+    box-shadow: 3px 3px #00000026;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background-color: white;
+}
+  .sidebar-nav h3{
+      font-weight: bold;
+      font-size: 13px!important;
+  }
+  .centered{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  .display-hidden{
+      display: none;
+  }
+  .centered-left{
+      justify-content: left;
+      display: flex;
+      align-items: center;
+  }
+  .cover-bg{
+      background-color: #e9ecef33;
+  }
+  .input--style-4 {
+    background: #fafafa;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #666;
+    transition: all 0.4s ease;
+    border: 2px solid #0000002e;
+}
+.input--style-4:focus{
+    border: 2px solid #17a2b8;   
+}
+
+.label {
+ font-size: 16px;
+ color: #555;
+ text-transform: capitalize;
+ display: block;
+ margin-bottom: 5px;
+}
+#message{
+    min-height: 50vh;
+}
+
+
+
+
 .support{
     
     border: 1px solid #fe4c50;
@@ -116,23 +188,7 @@ input {
     font-family: inherit;
   }
   
-.input--style-4 {
-    line-height: 50px;
-    background: #fafafa;
-    border-radius: 5px;
-    padding: 0 20px;
-    font-size: 16px;
-    color: #666;
-    transition: all 0.4s ease;
-}
 
-.label {
-    font-size: 16px;
-    color: #555;
-    text-transform: capitalize;
-    display: block;
-    margin-bottom: 5px;
-}
   
 .radio-container {
     display: inline-block;

@@ -59,13 +59,6 @@ exports.login = async (req, res, next) => {
    
 }
 
-exports.userSignupForm = async (req, res, next) => {
-    return res.render('login.hbs')
-}
-
-exports.userLoginForm = async (req, res, next) => {
-    return res.render('signup.hbs')
-}
 
 
 exports.logout = async (req, res, next) => {

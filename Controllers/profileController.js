@@ -10,12 +10,7 @@ exports.getOneProfile= async(req, res) =>{
         req.flash('error', 'Something went wrong. Try again')
         return res.redirect('back');
     }
-    res.status(200).json({
-        status: "success",
-        data:{
-            userProfile
-        }
-    })
+   return res.render('userSetting.hbs')
 }
 
 exports.getAllProfile= async(req, res) =>{
