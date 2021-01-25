@@ -39,6 +39,10 @@
       font-size: 10px!important;
       color: white;
   }
+  .font-small-black{
+    font-size: 11px!important;
+    color: #000;
+}
   .font-small{
     font-size: 11px!important;
 }
@@ -50,6 +54,7 @@
     background-color: green;
     border-color: green;
   }
+ 
   footer{
       width: 100vw;
   }
@@ -95,6 +100,18 @@ h3.mine.profile{
 .cursor{
     cursor: pointer;
 }
+.unitMessageInput {
+    padding: 10px 10px;
+    border-radius: 10px;
+    outline: none;
+    color: #666;
+    transition: all 0.4s ease;
+    border: 2px solid #0000002e;
+}
+
+.unitMessageInput:focus {
+    border: 1px solid #17a2b8;
+}
 .input--style-4:focus{
     border: 2px solid #17a2b8;   
 }
@@ -108,13 +125,23 @@ h3.mine.profile{
 }
 #message{
     min-height: 50vh;
+    max-height: 70vh;
+    overflow-y: scroll;
 }
 .user-img{
     width: auto;
     object-fit: cover;
     overflow: hidden;
 }
-
+#message::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  #message {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 
 
 

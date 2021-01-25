@@ -3,6 +3,10 @@
     * {
         font-size: small !important;
     }
+
+    .profile-ml-4 {
+        margin-left: 20%;
+    }
 </style>
 <br>
 <section class="cover-bg mt-5 pb-5">
@@ -34,7 +38,7 @@
                         <div class="col-md-9">
                             <div class="row">
                                 <div class="col-md-3 centered">
-                                    <img src="/img/handshake.jpg" alt="d-128x128" id="profile-picture" class="support">
+                                    <img src="/img/fff.jpeg" alt="d-128x128" id="profile-picture" class="support">
                                 </div>
                                 <div class="col-md-6 centered-left">
                                     <div class="details">
@@ -151,6 +155,41 @@
                     <section id="message" class="display-hidden">
                         <h3 class="mine">Check and respond to your messages here</h3>
                         <br>
+                        <div class="unitMessage">
+                            <div class="openbtw">
+                                <h3><strong><em>Charles Ugbana</em> </strong></h3>
+                                <p class="text-muted font-smaller">4 days ago</p>
+                            </div>
+                            <p class="m-0 font-small-black">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                Accusantium rerum
+                                soluta quos
+                                enim ab,
+                                tempore consequuntur praesentium labore possimus
+                                pariatur accusamus culpa voluptatibus quibusdam porro facilis ut tempora nemo
+                                repudiandae?</p>
+                            <small class="cursor profile" onclick="showInput(event)"><em
+                                    style="font-size: 10px !important; color:#17a2b8">Replies</em></small>
+                            <div class="messageSenderBox display-hidden">
+                                <input type="text" name="unitMessage" onkeypress="submitMessage(event)"
+                                    class="unitMessageInput" placeholder="Enter your message here...">
+                                <hr>
+                                <div class="profile-ml-4">
+                                    <div class="openbtw">
+                                        <h3><strong><em>Charles Ugbana</em> </strong></h3>
+                                        <p class="text-muted font-smaller">4 days ago</p>
+                                    </div>
+                                    <p class="m-0 font-small-black">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                        elit.
+                                        Accusantium rerum
+                                        soluta quos
+                                        enim ab,
+                                        tempore consequuntur praesentium labore possimus
+                                        pariatur accusamus culpa voluptatibus quibusdam porro facilis ut tempora nemo
+                                        repudiandae?</p>
+                                </div>
+                            </div>
+
+                        </div>
 
                     </section>
                     <section id="security" class="display-hidden">
@@ -183,9 +222,6 @@
     </section>
 </section>
 {{> footer}}
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
     integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     crossorigin="anonymous"></script>
@@ -193,6 +229,15 @@
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
 <script>
+    function submitMessage(e) {
+        if (e.keyCode == 13) {
+            console.log(e.target.value)
+            e.target.value = ''
+        }
+    }
+    function showInput(e) {
+        e.target.parentElement.nextElementSibling.classList.toggle('display-hidden')
+    }
     function fileUpload() {
         $("#inputFile").click()
     }
