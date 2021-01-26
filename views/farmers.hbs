@@ -100,7 +100,14 @@
 </div>
 <br><br><br><br><br>
 {{> footer}}
+
 <script>
+    $(function () {
+        $(document).scroll(function () {
+            var $nav = $(".navbar.fixed-top");
+            $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+        });
+    });
     function back2details() {
         $("#detailsOfFarmer").show('slow')
         $("#messagebox").hide('slow')
@@ -124,6 +131,11 @@
     }
 </script>
 <style>
+    .navbar.fixed-top.scrolled {
+        background-color: #343a40 !important;
+        transition: background-color 200ms linear;
+    }
+
     * {
         font-size: small !important;
     }

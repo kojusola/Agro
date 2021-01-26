@@ -100,7 +100,7 @@ h3.mine.profile{
 .cursor{
     cursor: pointer;
 }
-.unitMessageInput {
+/* .unitMessageInput {
     padding: 10px 10px;
     border-radius: 10px;
     outline: none;
@@ -111,11 +111,14 @@ h3.mine.profile{
 
 .unitMessageInput:focus {
     border: 1px solid #17a2b8;
-}
+} */
 .input--style-4:focus{
     border: 2px solid #17a2b8;   
 }
-
+.col-md-12 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
 .label {
  font-size: 16px;
  color: #555;
