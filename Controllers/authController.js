@@ -14,10 +14,7 @@ exports.userSignupForm = (req, res) => {
 }
 
 
-exports.signup = async (req, res,next) =>{
-        // const role = req.body.role
-        // if (role === "farmer"){
-            // user.init()
+exports.signup = async (req, res) =>{
             const newUser = new user({
                 username: req.body.username,
                 role: req.body.role
@@ -99,30 +96,9 @@ exports.login = async (req, res, next) => {
             })
         }
       })(req, res, next);
-    // }else{
-    //         passport.authenticate('farmerLocal', function (error, user, info) {
-    //             // console.log(user)
-    //             if (error) {
-    //                 req.flash("error", "Invalid credentials");
-    //                 return res.redirect("back")
-    //             } else if (!user) {
-    //                 req.flash("error", "Invalid credentials");
-    //                 // console.log(user)
-    //                 return res.redirect("back")
-    //             } else {
-    //                 req.logIn(user, (err) => {
-    //                 if (err) {
-    //                         req.flash("error", "Something went wrong!");
-    //                         return res.redirect("back")
-    //                     } else {
-    //                         req.flash("success", "Successfully logged In!");
-    //                         return res.redirect("/")
-    //                     }
-    //                 })
-    //             }
-    //           })(req, res, next);
-    // }
+   
 }
+
 
 
 exports.logout = async (req, res, next) => {

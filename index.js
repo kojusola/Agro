@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 
 app.use(
 	session({
-	  secret:"SECRET",
+	  secret: process.env.SESSION_SECRET,
 	  resave: false,
 	  saveUninitialized: false,
 	  cookie: { secure: false },
@@ -39,14 +39,17 @@ app.use(flash());
 //import routes
 const authRouter = require("./routes/authRouter")
 const profileRouter = require("./routes/profileRouter")
+const farmerRouter = require("./routes/farmerRouter")
 
 
 app.use('/auth', authRouter)
 app.use('/profile', profileRouter)
+app.use('/farmers', farmerRouter)
 
 
 //database connection
-const db = require("./connection")
+const db = require("./connection");
+const router = require('./routes/authRouter');
 db.db()
 
 //middlewares
@@ -63,9 +66,7 @@ app.use(function(req, res, next){
 });
 
 
-//view engine set up
-
-
+//view engine setup
 const hbs = expbs.create({
 	extname: "hbs", 
 	defaultLayout: "index", 

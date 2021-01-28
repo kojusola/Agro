@@ -1,158 +1,139 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/profile.css">
-    <title>User Profile</title>
-</head>
-<body>
-
-    <section class="container user-page">
-        
-        <section class="row">
-            <div class="col-4 design-setting">
-                <div class="card card-width">
-                    <div class="card-header">
-                      <h3 class="font-weight-bold justify-content-start">Account Setting</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="justify-content-start">Details about your personal information</p>
-                    </div>
-                </div>
-
-                <div class="card card-width">
-                    <div class="card-header">
-                      <h3 class="font-weight-bold justify-content-start">Notifications</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="justify-content-start">Details about your personal information</p>
-                    </div>
-                </div>
-
-                <div class="card card-width">
-                    <div class="card-header">
-                      <h3 class="font-weight-bold justify-content-start">Membership Plan</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="justify-content-start">Details about your personal information</p>
-                    </div>
-                </div>
-
-                <div class="card card-width">
-                    <div class="card-header">
-                      <h3 class="font-weight-bold justify-content-start">Password & security</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="justify-content-start">Details about your personal information</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-8" id="details-section">
-                <div class="row">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body card-container">
-                                <img src="img/pro-pic.png" alt="d-128x128" id="profile-picture" class="support" >
-                                <div class="details">
-                                    <p class="d-flex">Details about your personal information</p>
-                                    <button type="button" class="btn btn-info justify-content-end update-button">Update</button>
-                                </div>
-                            </div> 
+{{> nav2 }}
+<style>
+    * {
+        font-size: small !important;
+    }
+</style>
+<br>
+<section class="cover-bg mt-5 pb-5" style="width: 100vw;">
+    <div class="row mx-0">
+        <div class="col-md-12" id="settingsScreen">
+            <section class="container user-page">
+                <section class="row">
+                    <div class="col-md-4 py-4">
+                        <div class="sidebar-nav p-3 active" id="accountSettings">
+                            <div>
+                                <h3 class="justify-content-start mine">Account Setting</h3>
+                                <p class="text-muted">Details about your personal and professional information</p>
+                            </div>
+                        </div>
+                        <div class="sidebar-nav p-3" id="messages">
+                            <div>
+                                <h3 class="justify-content-start mine">Messages</h3>
+                                <p class="text-muted">Important messages and business proposals</p>
+                            </div>
+                        </div>
+                        <div class="sidebar-nav p-3" id="password">
+                            <div>
+                                <h3 class="justify-content-start mine">password & security</h3>
+                                <p class="text-muted">Keep your account secure</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="col-md-8 py-4">
+                        <div class="profile-heading p-3">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-3 centered">
+                                            <img src="/img/fff.jpeg" alt="d-128x128" id="profile-picture"
+                                                class="support">
+                                        </div>
+                                        <div class="col-md-6 centered-left">
+                                            <div class="details">
+                                                <h3 class="mine">Upload a New Photo</h3>
+                                                <p class="text-muted"><em>Profile-pic.jpg</em></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 centered">
+                                    <form action="/" id="pixForm" method="POST" class="display-hidden">
+                                        <input type="file" name="profilePix" id="inputFile" onchange="fileSelect()">
+                                    </form>
+                                    <button type="button" class="btn btn-info justify-content-end update-button"
+                                        onclick="fileUpload()">Update</button>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="row user-information">
-                    <div class="col">
-                        <section class="heading">
-                            <h2 class="font-weight-bold">Change User Information here</h2>
-                        </section>
-                            <div class="card card-4 card-info">
-                                <div class="card-body">
-                                     <form method="#">
-                                         <div class="row row-space">
-                                             <div class="col">
-                                                  <div class="input-group">
-                                                         <label class="label">first name</label>
-                                                        <input class="input--style-4" type="text" name="first_name">
-                                                     </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="input-group">
-                                                            <label class="label">last name</label>
-                                                            <input class="input--style-4" type="text" name="last_name">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row row-space">
-                                                    <div class="col">
-                                                        <div class="input-group">
-                                                            <label class="label">Birthday</label>
-                                                            <input class="input--style-4" type="date" id="birthday" name="birthday">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row row-space">
-                                                    <div class="col">
-                                                        <div class="input-group">
-                                                            <label class="label">Expertise</label>
-                                                            <input class="input--style-4" type="text" name="expertise">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="input-group">
-                                                            <label class="label">Phone Number</label>
-                                                            <input class="input--style-4" type="text" name="phone">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row row-space ">
-                                                    <div class="col">
-                                                        <div class="input-group">
-                                                            <label class="label">Interests</label>
-                                                            <input class="input--style-4" type="text" name="unterest">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="input-group">
-                                                            <label class="label">Languages</label>
-                                                            <input class="input--style-4" type="text" name="lang">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row row-space ">
-                                                    <div class="col">
-                                                        <div class="input-group">
-                                                            <label class="label">Country</label>
-                                                            <input class="input--style-4" type="text" name="country">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="input-group">
-                                                            <label class="label">Number of Lands Owned</label>
-                                                            <input class="input--style-4" type="number" name="landsOwned">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row row-space ">
-                                                    <div class="col">
-                                                        <div class="input-group">
-                                                            <label class="label">Years of Experience</label>
-                                                            <input class="input--style-4" type="number" name="experience">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="input-group">
-                                                            <label class="label">Major Produce</label>
-                                                            <input class="input--style-4" type="text" name="mProduce">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="input-group">
+                        <div class="user-information p-5">
+                            <section id="account">
+                                <h3 class="mine">Change User Information here</h3>
+                                <br>
+                                <form method="#">
+                                    <div class="row row-space">
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <label class="label">first name</label>
+                                                <input class="input--style-4" type="text" name="first_name">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <label class="label">last name</label>
+                                                <input class="input--style-4" type="text" name="last_name">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <label class="label">State</label>
+                                                <input class="input--style-4" type="text" name="state">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row row-space">
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <label class="label">Birthday</label>
+                                                <input class="input--style-4" type="date" id="birthday" name="birthday">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <label class="label">Phone Number</label>
+                                                <input class="input--style-4" type="text" name="phone">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row row-space ">
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <label class="label">Years of Experience</label>
+                                                <input class="input--style-4" type="number" name="experience">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <label class="label">Languages</label>
+                                                <input class="input--style-4" type="text" name="lang">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row row-space ">
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <label class="label">Number of Lands Owned</label>
+                                                <input class="input--style-4" type="number" min="0" name="landsOwned">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <label class="label">Major Produce</label>
+                                                <input class="input--style-4" type="text" name="mProduce">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row row-space">
+                                        <div class="input-group" style="margin: 0 15px">
+                                            <label class="label">About You</label>
+                                            <textarea class="input--style-4 w-100" rows="3" name="about-you"></textarea>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <!-- <div class="input-group">
                                                     <label class="label">Subject</label>
                                                     <div class="rs-select2 js-select-simple select--no-search">
                                                         <select name="subject">
@@ -164,21 +145,145 @@
                                                         <div class="select-dropdown"></div>
                                                     </div>
                                                 </div> -->
-                                                <div class="p-t-15">
-                                                    <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
-                                                </div>
-                                     </form>
-                             </div>
+                                    <div class="">
+                                        <button class="btn btn--blue btn-block" type="submit" style="background-color: #17a2b8;
+    border-color: #17a2b8;">Submit</button>
+                                    </div>
+                                </form>
+                            </section>
+                            <section id="message" class="display-hidden">
+                                <h3 class="mine">Check and respond to your messages here</h3>
+                                <br>
+                                <div class="unitMessage">
+                                    <div class="openbtw">
+                                        <h3><strong><em>Charles Ugbana</em> </strong></h3>
+                                        <p class="text-muted font-smaller">4 days ago</p>
+                                    </div>
+                                    <p class="m-0 font-small-black">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                        elit.
+                                        Accusantium rerum
+                                        soluta quos
+                                        enim ab,
+                                        tempore consequuntur praesentium labore possimus
+                                        pariatur accusamus culpa voluptatibus quibusdam porro facilis ut tempora nemo
+                                        repudiandae?</p>
+                                    <small class="cursor profile" onclick="showInput(event)"><em
+                                            style="font-size: 10px !important; color:#17a2b8">Open Replies</em></small>
+                                    <hr>
+                                    {{!-- <div class="messageSenderBox display-hidden">
+                                        <input type="text" name="unitMessage" onkeypress="submitMessage(event)"
+                                            class="unitMessageInput" placeholder="Enter your message here...">
+                                        <hr>
+                                        <div class="profile-ml-4">
+                                            <div class="openbtw">
+                                                <h3><strong><em>Charles Ugbana</em> </strong></h3>
+                                                <p class="text-muted font-smaller">4 days ago</p>
+                                            </div>
+                                            <p class="m-0 font-small-black">Lorem ipsum, dolor sit amet consectetur
+                                                adipisicing
+                                                elit.
+                                                Accusantium rerum
+                                                soluta quos
+                                                enim ab,
+                                                tempore consequuntur praesentium labore possimus
+                                                pariatur accusamus culpa voluptatibus quibusdam porro facilis ut tempora
+                                                nemo
+                                                repudiandae?</p>
+                                        </div>
+                                    </div> --}}
+
+                                </div>
+
+                            </section>
+                            <section id="security" class="display-hidden">
+                                <h3 class="mine">Change your account password here</h3>
+                                <br>
+                                <form action="">
+                                    <div class="input-group">
+                                        <label for="curr" class="label">Current Password</label>
+                                        <input type="password" class="input--style-4" name="currentPass" id="curr">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="new" class="label">New Password</label>
+                                        <input type="password" class="input--style-4" name="newPass" id="new">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="rnew" class="label">Retype New Password</label>
+                                        <input type="password" class="input--style-4" name="rnewPass" id="rnew">
+                                    </div>
+                                    <div class="">
+                                        <button class="btn btn--blue btn-block" type="submit" style="background-color: #17a2b8;
+    border-color: #17a2b8;">Submit</button>
+                                    </div>
+                                </form>
+
+                            </section>
+
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-    </section>
-    
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-    
-</body>
-</html>
+                </section>
+            </section>
+        </div>
+        <div class="col-md-4 display-hidden bg-dark" id="chatScreen">
+            <p onclick="closeChatScreen()" class="text-right color-white p-3 "><span class="cursor"> Close</span></p>
+        </div>
+    </div>
+</section>
+{{> footer}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+<script>
+    function closeChatScreen() {
+        $("#settingsScreen").removeClass("col-md-9")
+        $("#settingsScreen").addClass("col-md-12")
+        $("#chatScreen").removeClass("col-md-3")
+        $("#chatScreen").hide()
+
+    }
+    function submitMessage(e) {
+        if (e.keyCode == 13) {
+            console.log(e.target.value)
+            e.target.value = ''
+        }
+    }
+    function showInput(e) {
+        $('#settingsScreen').removeClass("col-md-12")
+        $('#settingsScreen').addClass("col-md-8")
+        $('#chatScreen').show("slow")
+    }
+    function fileUpload() {
+        $("#inputFile").click()
+    }
+    function fileSelect() {
+        $("#pixForm").submit()
+    }
+    $('#accountSettings').on('click', function () {
+        $('#messages').removeClass("active")
+        $('#password').removeClass("active")
+        $('#accountSettings').addClass("active")
+        $('#account').show('slow')
+        $('#security').hide('slow')
+        $('#message').hide('slow')
+
+    })
+    $('#password').on('click', function () {
+        $('#messages').removeClass("active")
+        $('#password').addClass("active")
+        $('#accountSettings').removeClass("active")
+        $('#account').hide('slow')
+        $('#security').show('slow')
+        $('#message').hide('slow')
+    })
+    $('#messages').on('click', function () {
+        $('#messages').addClass("active")
+        $('#password').removeClass("active")
+        $('#accountSettings').removeClass("active")
+        $('#account').hide('slow')
+        $('#security').hide('slow')
+        $('#message').show('slow')
+    })
+</script>

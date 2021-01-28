@@ -13,8 +13,9 @@ const userProfileSchema = new mongoose.Schema({
     address:{
         type: String
     },
-    country:{
+    state:{
         type: String,
+        required: [true, 'state is required'],
         trim: true
     },
     phoneNumber:{

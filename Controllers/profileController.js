@@ -10,18 +10,15 @@ exports.profileForm = async(req, res) => {
 }
 
 exports.getOneProfile= async(req, res) =>{
-    const userProfile = await Profile.findById({user_id: req.params.id});
-    if(!userProfile){
-        req.flash('error', 'Something went wrong. Try again')
-        return res.redirect('back');
-    }
-    res.status(200).json({
-        status: "success",
-        data:{
-            userProfile
-        }
-    })
+    // const userProfile = await Profile.findById({user_id: req.params.id});
+    // if(!userProfile){
+    //     req.flash('error', 'Something went wrong. Try again')
+    //     return res.redirect('back');
+    // }
+   return res.render('userSetting.hbs')
 }
+
+
 
 exports.getAllProfile= async(req, res) =>{
     const allUsersProfile = await Profile.find();

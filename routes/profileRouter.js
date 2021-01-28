@@ -12,4 +12,5 @@ router.route('/:id/pimage').post(upload.single('image'),updateProfileImage);
 router.route('/:id/fimage').post(upload.array('image'),updateProfileImage);
 
 
+
 module.exports = router;
