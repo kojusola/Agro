@@ -40,8 +40,9 @@ app.use(flash());
 const authRouter = require("./routes/authRouter")
 const profileRouter = require("./routes/profileRouter")
 const farmerRouter = require("./routes/farmerRouter")
+const landRouter = require("./routes/landingPageRouter")
 
-
+app.use('/',landRouter)
 app.use('/auth', authRouter)
 app.use('/profile', profileRouter)
 app.use('/farmers', farmerRouter)
