@@ -36,7 +36,7 @@
 
 .banner{
     height: 60vh;
-    background-image: url("./tomato-banner.jpg");
+    background-image: url("./../img/tomato-banner.jpg");
     background-position: center;
     background-size: auto;
     background-repeat: no-repeat;
