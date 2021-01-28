@@ -1,0 +1,165 @@
+<section class="bodyP">
+    <div class="farmimg">
+
+    </div>
+    <div class="profileform">
+            <h1>Complete Your Profile</h1>
+            <label for="imageinputs" id="profileimage">Profile image:</label>
+            <label for="imageinput" id="browse"><i>  Browse...</i></label><br>
+            <input type="file" name="profileimage" id="imageinput" required><br>
+            <div class="gallery1"></div>
+            <div class="profileinput">
+                <div class="profileinputs">
+                    <label for="firstname">First Name</label><br>
+                    <input type="text" name="firstname" id="firstname" required>
+                </div>
+                <div class="profileinputs">
+                    <label for="lastname">Last Name</label><br>
+                    <input type="text" name="lastname" id="lastname" required>
+                </div>
+            </div>
+            <div class="profileinput">
+                <div class="profileinputs">
+                    <label for="birthday">Birthday</label><br>
+                    <input type="date" name="birthday" id="birthday" required>
+                </div>
+                <div class="profileinputs">
+                    <label for="address">Address</label><br>
+                    <input type="text" name="address" id="address" required>
+                </div>
+            </div>
+            <div class="profileinput">
+                <div class="profileinputs">
+                    <label for="expertise">Expertise</label><br>
+                    <input type="text" name="expertise" id="expertise" required>
+                </div>
+                <div class="profileinputs">
+                    <label for="phonenumber">Phone Number</label><br>
+                    <input type="text" name="phonenumber" id="phonenumber" required>
+                </div>
+            </div>
+            <div class="profileinput">
+                <div class="profileinputs">
+                    <label for="interests">Interests</label><br>
+                    <input type="text" name="interests" id="interests" required>
+                </div>
+                <div class="profileinputs">
+                    <label for="languages">Languages</label><br>
+                    <input type="text" name="languages" id="languages" required>
+                </div>
+            </div>
+            <div class="profileinput">
+                <div class="profileinputs">
+                    <label for="country">Country</label><br>
+                    <input type="text" name="country" id="country" required>
+                </div>
+                <div class="profileinputs">
+                    <label for="landnumber">Number of lands Owned</label><br>
+                    <input type="number" name="landnumber" id="landnumber" required>
+                </div>
+            </div>
+            {{#ifeq User.role 'farmer' }}
+            <div class="profileinput">
+                <div class="profileinputs">
+                    <label for="majorproduce">Major Produce</label><br>
+                    <input type="text" name="majorproduce" id="majorproduce" required>
+                </div>
+                <div class="profileinputs">
+                    <label for="yrexperience">Years of Experience</label><br>
+                    <input type="number" name="yrexperience" id="yrexperience" required>
+                </div>
+            </div>
+            {{/ifeq}}
+            <div class="profileinput">
+                <div class="profileinputs">
+                    <label for="aboutyou">About you</label><br>
+                    <textarea name="aboutyou" id="aboutyou" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+            <label for="imageinputs">Farm images, if any:</label>
+            <label for="farmimageinput" id="browse"><i>  Browse...</i></label><br>
+            <input type="file" name="farmimage" id="farmimageinput" multiple required><br>
+            <div class="gallery"></div>
+            <button type="submit" id="button">Create Profile</button>
+    </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $(function() {
+    // Multiple images preview in browser
+    var imagesPreview = function(input, placeToInsertImagePreview) {
+
+        if (input.files) {
+            var filesAmount = input.files.length;
+
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function(event) {
+                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+
+    };
+
+    $('#farmimageinput').on('change', function() {
+        imagesPreview(this, 'div.gallery');
+    });
+    $('#imageinput').on('change', function() {
+        imagesPreview(this, 'div.gallery1');
+    });
+});
+    function saveDetail(){
+        var firstname = $('#firstname')
+        var lastname = $('#lastname')
+        var birthday = $('#birthday')
+        var address = $('#address')
+        var country = $('#country')
+        var phoneNumber = $('#phoneNumber')
+        var interests = $('#interests')
+        var expertise = $('#expertise')
+        var languages = $('#languages')
+        var landnumber = $('#landnumber')
+        var majorproduce = $('#majorproduce')
+        var yrexperience = $('#yrexperience')
+        var aboutyou = $('#aboutyou')
+        var profileimage = $('#imageinput')
+        var farmimage = $('#farmimageinput')
+          $.ajax({
+            url: `/profile/`,
+            type: "POST",
+            dataType: "json",
+            data: {
+                firstname,
+                lastname,
+                birthday,
+                address,
+                country,
+                phoneNumber,
+                interests,
+                expertise,
+                languages,
+                landnumber,
+                majorproduce,
+                yrexperience,
+                aboutyou,
+                profileimage,
+                farmimage
+            },
+            success: function (data) {
+                alert("Successfully Added information")
+            },
+            error: function (error) {
+
+            }
+    });
+    }
+    $("#button").click(function(){
+        console.log(1)
+        saveDetail();
+    })
+</script>

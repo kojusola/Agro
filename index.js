@@ -2,13 +2,15 @@ require('dotenv').config()
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
-const hbs = require("express-handlebars");
+const expbs = require("express-handlebars");
+const Handlebars = require("handlebars");
 const flash = require("connect-flash")
 const fs = require('fs')
 const passport = require("passport")
 const mongoose = require("mongoose")
 const session = require("express-session")
 const MongoStore = require("connect-mongo")(session);
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
 
 const app = express();
@@ -61,16 +63,38 @@ app.use(function(req, res, next){
 });
 
 
-//view engine setup
-app.engine("hbs", hbs({extname: "hbs", defaultLayout: "index", layoutsDir: __dirname + "/views/layouts/"}));
+//view engine set up
+
+
+const hbs = expbs.create({
+	extname: "hbs", 
+	defaultLayout: "index", 
+	layoutsDir: __dirname + "/views/layouts/",
+	handlebars: allowInsecurePrototypeAccess(Handlebars),
+	helpers:{
+		diff: function(a, b){
+			return a - b
+		},
+		equal: function(a, b){
+			return a === b
+		},
+		ifeq: function(arg1, arg2,options){
+			return(arg1 == arg2) ? options.inverse(this): options.inverse(this);
+		}
+	}
+});
+
+// Handlebars.registerHelper('ifeq', function(arg1, arg2,options){
+// 	return(arg1 == arg2) ? options.inverse(this): options.inverse(this);
+// })
+
+app.engine("hbs", hbs.engine);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
 
 
 
-
-
 app.listen(process.env.PORT || 3000, () => {
     console.log("server has started")
-})
+});

@@ -14,17 +14,38 @@ exports.userSignupForm = (req, res) => {
 }
 
 
-exports.signup = async (req, res) =>{
+exports.signup = async (req, res,next) =>{
         // const role = req.body.role
         // if (role === "farmer"){
             // user.init()
             const newUser = new user({
-                name: req.body.name,
                 username: req.body.username,
                 role: req.body.role
             })
             const createdUser = await user.register(newUser, req.body.password);
-            return res.redirect("/auth/login") 
+            if(createdUser){
+                passport.authenticate('local', function (error, user, info) {
+                console.log(user)
+                if (error) {
+                    req.flash("error", "Invalid credentials");
+                    return res.redirect("back")
+                } else if (!user) {
+                    req.flash("error", "Invalid credentials");
+                    // console.log(user)
+                    return res.redirect("back")
+                } else {
+                    req.logIn(user, (err) => {
+                    if (err) {
+                            req.flash("error", "Something went wrong!");
+                            return res.redirect("back")
+                        } else {
+                            req.flash("success", "Welcome! Kindly complete your profile");
+                            return res.redirect(`/profile`);
+                        }
+                    })
+                }
+              })(req, res, next);
+            }
             // return res.json({
             //     user:createdUser
             // })

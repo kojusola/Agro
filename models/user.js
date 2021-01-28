@@ -19,11 +19,6 @@ var options = {
 };
 
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, 'Name is required for a user'],
-        trim: true,
-    },
     username: {
         type: String,
         required: [true, 'Email is required for a user'],
