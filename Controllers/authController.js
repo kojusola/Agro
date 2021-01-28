@@ -14,7 +14,7 @@ exports.userSignupForm = (req, res) => {
 }
 
 
-exports.signup = async (req, res) =>{
+exports.signup = async (req, res, next) =>{
             const newUser = new user({
                 username: req.body.username,
                 role: req.body.role
