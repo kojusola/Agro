@@ -3,27 +3,44 @@ const user= require('./user');
 
 const userProfileSchema = new mongoose.Schema({
     user_id: String,
-    name: String,
-    username: String,
+    firstname: String,
+    lastname: String,
+    email: String,
     role:String,
     birthday:{
-        type: Date,
-        required:[true, 'Birthday is required']
+        type: Date
     },
     address:{
-        type: String,
-        required:[true, 'address is required']
+        type: String
     },
     state:{
         type: String,
         required: [true, 'state is required'],
         trim: true
     },
-    phone:{
+    phoneNumber:{
         type: String,
         trim:true
     },
     interests:{
+        type:String
+    },
+    expertise:{
+        type:String
+    },
+    languages:{
+        type:String
+    },
+    landnumber:{
+        type:Number
+    },
+    majorproduce:{
+        type:String
+    },
+    yrexperience:{
+        type:Number
+    },
+    aboutyou:{
         type:String
     },
     profileimage:{

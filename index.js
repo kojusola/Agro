@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const expbs = require("express-handlebars");
-const Handlebars = require('handlebars')
+const Handlebars = require("handlebars");
 const flash = require("connect-flash")
 const fs = require('fs')
 const passport = require("passport")
@@ -78,32 +78,24 @@ const hbs = expbs.create({
 		},
 		equal: function(a, b){
 			return a === b
+		},
+		ifeq: function(arg1, arg2,options){
+			return(arg1 == arg2) ? options.inverse(this): options.inverse(this);
 		}
 	}
-})
+});
+
+// Handlebars.registerHelper('ifeq', function(arg1, arg2,options){
+// 	return(arg1 == arg2) ? options.inverse(this): options.inverse(this);
+// })
+
 app.engine("hbs", hbs.engine);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
-
-// Register Partials
-const partialsDir = path.join(__dirname, 'views', 'partials');
-const filenames = fs.readdirSync(partialsDir);
-
-
-filenames.forEach(async (filename) => {
-  const matches = /^([^.]+).hbs$/.exec(filename);
-  if (!matches) {
-    return;
-  }
-  const name = matches[1];
-  const template = fs.readFileSync(path.join(partialsDir, filename), 'utf8');
-  Handlebars.registerPartial(name, template);
-});
-
 
 
 
 
 app.listen(process.env.PORT || 3000, () => {
     console.log("server has started")
-})
+});

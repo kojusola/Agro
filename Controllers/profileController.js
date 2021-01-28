@@ -3,6 +3,11 @@ const Profile = require("../models/profile");
 const upload = require("../utils/multer");
 const cloudinary = require("../utils/cloudinary");
 
+exports.profileForm = async(req, res) => {
+    const presentUser = await User.findById({_id:req.user._id});
+    console.log(presentUser)
+    res.render('profileForm.hbs', {'User': presentUser })
+}
 
 exports.getOneProfile= async(req, res) =>{
     // const userProfile = await Profile.findById({user_id: req.params.id});
@@ -46,16 +51,25 @@ exports.getAllFarmerProfile= async(req, res) =>{
 
 exports.createProfile =  async(req, res)=>{
     console.log(req.body)
+    const result = await cloudinary.uploader.upload(req.body.profileimage.file.path);
     const Profile = new Profile({
         user_id: req.user._id,
-        name: req.user.name,
         email: req.user.username,
         role: req.user.role,
+        profileimage: {avatar:result.secure_url,cloundinary_id: result.public_id},
         birthday: req.body.birthday,
         address: req.body.address,
         country: req.body.country,
-        phone: req.body.phone,
-        interests:req.body.interests     
+        phoneNumber: req.body.phone,
+        firstname:req.body.firstname,
+        lastname:req.body.lastname,
+        expertise:req.body.expertise,
+        languages:req.body.languages,
+        landnumber:req.body.landnumber,
+        majorproduce:req.body.majorproduce,
+        yrexperience:req.body.yrexperience,
+        aboutyou:req.body.aboutyou,  
+        interests:req.body.interests,   
     })
     console.log(profile)
     await Profile.save();
