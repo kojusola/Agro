@@ -111,7 +111,7 @@ exports.createProfile =  async(req, res)=>{
         ,
         birthday: req.body.birthday,
         state: req.body.state,
-        phoneNumber: req.body.phone,
+        phoneNumber: req.body.phonenumber,
         firstname:req.body.firstname,
         lastname:req.body.lastname,
         languages:req.body.languages,
