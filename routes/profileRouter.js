@@ -5,7 +5,7 @@ const { updateProfile, updateProfileImage,createMessage, retriveOneProfile, getA
 const {isLoggedIn, restrictTo} = require("../middleware/authorization")
 
 
-router.route('/').get(profileForm).post(createProfile);
+router.route('/').get(isLoggedIn, profileForm).post(isLoggedIn, createProfile);
 router.route('/all').get(getAllProfile);
 router.route('/:id').get(getOneProfile).patch(updateProfile);
 router.route('/:id/retrieve').get(retriveOneProfile)
