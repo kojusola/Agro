@@ -290,7 +290,7 @@
 
     function submitMessage(e) {
         if (e.keyCode == 13) {
-            const node = document.getElementById("node").value
+            node = document.getElementById("node").value
             // save in database
             firebase.database().ref(node).push().set({
                 "sender": user,
@@ -298,33 +298,30 @@
                 "time": formatAMPM(new Date)
             });
             e.target.value = ''
-            firebase.database().ref(node).on("child_added", function (snapshot) {
-                var html = "";
-                // give each message a unique ID
-                if (snapshot.val().sender == user) {
-                    html += "<div class='itemMe' id='message-" + snapshot.key + "'>";
-                    html += "<p class='font-small'>" + snapshot.val().message + "</p>"
-                    html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
-                    html += "</div> <br>";
-                }
-
-                else {
-                    html += "<div class='item' id='message-" + snapshot.key + "'>";
-                    html += "<p class='font-small'>" + snapshot.val().message + "</p>"
-                    html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
-                    html += "</div> <br>";
-                }
-
-                document.getElementById("screen").innerHTML += html;
-                scroll()
-            });
-
 
         }
-
     }
 
+    firebase.database().ref(node).on("child_added", function (snapshot) {
+        var html = "";
+        // give each message a unique ID
+        if (snapshot.val().sender == user) {
+            html += "<div class='itemMe' id='message-" + snapshot.key + "'>";
+            html += "<p class='font-small'>" + snapshot.val().message + "</p>"
+            html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
+            html += "</div> <br>";
+        }
 
+        else {
+            html += "<div class='item' id='message-" + snapshot.key + "'>";
+            html += "<p class='font-small'>" + snapshot.val().message + "</p>"
+            html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
+            html += "</div> <br>";
+        }
+
+        document.getElementById("screen").innerHTML += html;
+        scroll()
+    });
 
     function showInput(e, node) {
         $('#settingsScreen').removeClass("col-md-12")
