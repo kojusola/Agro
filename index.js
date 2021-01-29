@@ -53,10 +53,11 @@ app.use(function(req, res, next){
 
 
 //import routes
-const authRouter = require("./routes/authRouter")
+
 const profileRouter = require("./routes/profileRouter")
 const farmerRouter = require("./routes/farmerRouter")
 const landRouter = require("./routes/landingPageRouter")
+const authRouter = require("./routes/authRouter")
 
 app.use('/',landRouter)
 app.use('/auth', authRouter)
@@ -66,7 +67,6 @@ app.use('/farmers', farmerRouter)
 
 //database connection
 const db = require("./connection");
-const router = require('./routes/authRouter');
 db.db()
 
 
