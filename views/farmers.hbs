@@ -17,19 +17,17 @@
             </div>
         </section>
         <section class="container grid-display">
-            <div class="card bg-light" style="width: 18rem;" onclick="detailss()">
+            {{#each profiles}}
+            <div class="card bg-light" style="width: 18rem;" onclick="detailss(event, `{{this.user_id}}`)">
                 <i class="fas fa-certificate"></i>
                 <img class="card-img-top" src="/img/fff.jpeg" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Charles Ugbana</h5>
-                    <p class="card-text font-small">Some quick example text to build on the card title and make up the
-                        bulk of the
-                        card's
-                        content.</p>
+                    <h5 class="card-title">{{this.firstname}} {{this.lastname}}</h5>
+                    <p class="card-text font-small">{{this.aboutyou}}</p>
                     <div class="openbtw">
                         <div class="text-center">
                             <i class="fas fa-map-marker-alt font-small"></i> <br>
-                            <span class="font-small">location</span>
+                            <span class="font-small">{{this.state}}</span>
                         </div>
                         <div class="text-center">
                             <i class="fas fa-user font-small"></i> <br>
@@ -37,11 +35,12 @@
                         </div>
                         <div class="text-center">
                             <i class="fas fa-map-marked-alt font-small"></i> <br>
-                            <span class="font-small">Yes</span>
+                            <span class="font-small">{{this.landnumber}}</span>
                         </div>
                     </div>
                 </div>
             </div>
+            {{/each}}
 
         </section>
     </div>
@@ -56,27 +55,23 @@
                     <img src="/img/fff.jpeg" alt="" id="pimage" style="width: 100%; border-radius: 20px">
                 </div><br>
                 <div>
-                    <h3 id="name" class="mine color-white">Charles Ugbana</h3>
-                    <p class="font-smaller">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur,
-                        aliquid
-                        culpa quos
-                        blanditiis quidem quisquam tempore aspernatur
-                        accusamus quis laborum modi non vero dicta, id minus, sequi iste pariatur repellat!</p>
+                    <h3 id="name" class="mine color-white"></h3>
+                    <p class="font-smaller" id="about"></p>
                 </div>
 
                 <div class="openbtw">
-                    <p>Location: State</p>
-                    <p>Phone: 08142381096</p>
+                    <p>Location: <span id="location" class="font-smaller"></span></p>
+                    <p>Phone: <span id="phone" class="font-smaller"></span></p>
                 </div>
                 <div class="openbtw">
-                    <p>Age: 50</p>
-                    <p>Yrs. of Exp.: 40</p>
+                    <p>Age: <span id="birthday" class="font-smaller"></span></p>
+                    <p>Yrs. of Exp.: <span id="exp" class="font-smaller"></span></p>
                 </div>
                 <div>
-                    <p class="font-smaller">Major Produce: Cocoa, Groundnut, Pea</p>
+                    <p class="font-smaller">Major Produce: <span id="produce" class="font-smaller"></span></p>
                 </div>
                 <div>
-                    <p class="font-smaller">Lands Owned: 6</p>
+                    <p class="font-smaller">Lands Owned: <span id="land" class="font-smaller"></span></p>
                 </div>
                 <div class="text-center">
                     <button class="btn btn-block btn-green" onclick="sendMessage()">Initiate a discuss</button>
@@ -84,11 +79,14 @@
             </article>
             <article class="display-hidden" id="messagebox">
                 <div class="color-white">
-                    Send Message to <h3 class="mine">Charles Ugbana</h3>
+                    Send Message to <h3 class="mine" id="name2"></h3>
                 </div>
-                <form action="">
-                    <textarea name="message" id="mes" class="w-100 input--style-4" rows="15"></textarea>
-                    <button type="submit" class="btn btn-block btn-green">Send</button>
+                <form>
+                    <input type="hidden" id="identity">
+                    <input type="hidden" id="emaill">
+                    <textarea name="message" id="mes" class="w-100 input--style-4" rows="15" required></textarea>
+                    <p id="response" class="color-white"></p>
+                    <button type="button" onclick="sendMessageToFarmer()" class="btn btn-block btn-green">Send</button>
                 </form>
                 <br><br>
                 <div class="text-right color-white cursor" onclick="back2details()">
@@ -102,6 +100,29 @@
 {{> footer}}
 
 <script>
+    function sendMessageToFarmer() {
+        const id = document.getElementById('identity').value
+        const mes = document.getElementById('mes').value
+        if (mes == '' || id == '') {
+            return
+        }
+        $.ajax({
+            url: `/profile/${id}/message`,
+            dataType: 'json',
+            method: 'POST',
+            data: {
+                message: mes,
+                email: id
+            },
+            success: function (data) {
+                document.getElementById("response").textContent = data.message
+            },
+            error: function () {
+                document.getElementById("response").textContent = "Something went wrong!!!"
+            }
+        })
+        document.getElementById('mes').value = ''
+    }
     $(function () {
         $(document).scroll(function () {
             var $nav = $(".navbar.fixed-top");
@@ -116,7 +137,29 @@
         $("#detailsOfFarmer").hide('slow')
         $("#messagebox").show('slow')
     }
-    function detailss() {
+    function detailss(e, id) {
+        $.ajax({
+            url: `/profile/${id}/retrieve`,
+            method: 'GET',
+            success: function (data) {
+                const { email, aboutyou, firstname, lastname, state, birthday, yrexperience, landnumber, phoneNumber, majorproduce, user_id } = data.data.userProfile
+
+                document.getElementById("name").textContent = `${firstname} ${lastname}`
+                document.getElementById("name2").textContent = `${firstname} ${lastname}`
+                document.getElementById("about").textContent = aboutyou
+                document.getElementById("location").textContent = state
+                document.getElementById("birthday").textContent = birthday
+                document.getElementById("phone").textContent = phoneNumber
+                document.getElementById("land").textContent = landnumber
+                document.getElementById("exp").textContent = yrexperience
+                document.getElementById("produce").textContent = majorproduce
+                document.getElementById("identity").value = user_id
+                document.getElementById(emaill).value = email
+            },
+            error: function () {
+                console.log("Something went wrong!!!")
+            }
+        })
         $("#main").removeClass("col-md-12")
         $("#main").addClass("col-md-9")
         $("#sideview").addClass("col-md-3")

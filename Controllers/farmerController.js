@@ -1,3 +1,6 @@
+const Profile = require("../models/profile")
+
 exports.getFarmers =  async (req, res, next) => {
-    res.render('farmers.hbs')
+    const profiles = await Profile.find()
+    res.render('farmers.hbs', {profiles})
 }

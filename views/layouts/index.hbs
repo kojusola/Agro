@@ -14,10 +14,39 @@
     <link rel="stylesheet" href="/css/sign.css">
     <link rel="stylesheet" href="/css/profileForm.css">
     <link rel="stylesheet" href="/css/agro.css">
-
+    <style>
+        .single-row {
+            margin-top: 60px;
+            z-index: 1030;
+            position: fixed !important;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
+
+    {{#if error }}
+    {{#if error.length }}
+    <div class="alert alert-danger single-row" role="alert">
+        <span>
+            {{error}}
+        </span>
+        {{!-- <i class="fas fa-times-circle float-right py-2" style="font-size: 18px;"></i> --}}
+    </div>
+    {{/if}}
+    {{/if}}
+    {{#if success }}
+    {{#if success.length }}
+    <div class="alert alert-success single-row" role="alert">
+        <span>
+            {{success}}
+        </span>
+        {{!-- <i class="fas fa-times-circle float-right py-2" style="font-size: 18px;" onclick="alertHide(event)"></i>
+        --}}
+    </div>
+    {{/if}}
+    {{/if}}
     {{{ body }}}
 
 

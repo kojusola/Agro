@@ -54,15 +54,46 @@
     background-color: green;
     border-color: green;
   }
- 
+  .bg-green{
+   background-color: #17a2b8;   
+  }
+  .chatBody{
+      display: flex;
+      flex-direction: column;
+      min-height: 70vh;
+      max-height: 85vh!important;
+  }
+  .chatBody input{
+   height: 50px;
+}
+.chatBody div.screen{
+    flex: 1;
+ }
   footer{
       width: 100vw;
   }
-  .profile-heading, .user-information{
+  .profile-heading, .user-information, .chatScreenn{
     box-shadow: 3px 3px #00000026;
     border-radius: 10px;
     margin-bottom: 15px;
     background-color: white;
+}
+#chatScreen article{
+    min-height: 70vh;
+    max-height: 85vh!important;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+#chatScreen article div.header{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    height: 45px;
+}
+#chatScreen article div.chatBody{
+    flex: 1;
 }
 h3.mine.profile{
     font-size: 40px!important;
@@ -100,7 +131,7 @@ h3.mine.profile{
 .cursor{
     cursor: pointer;
 }
-/* .unitMessageInput {
+.unitMessageInput {
     padding: 10px 10px;
     border-radius: 10px;
     outline: none;
@@ -108,10 +139,48 @@ h3.mine.profile{
     transition: all 0.4s ease;
     border: 2px solid #0000002e;
 }
+/* ============================================ */
+
+.itemMe {
+    align-self: flex-end;
+    text-align: right;
+    background: #d7e787;
+    padding: 5px 10px;
+    border-radius: 10px 10px 0 10px;
+    margin-left: 40px;
+  }
+  .itemMe p:nth-of-type(1) {
+    font-weight: bold;
+    font-style: italic;
+    margin: 0;
+  }
+ 
+
+  .item {
+    align-self: flex-start;
+    text-align: left;
+    background: #e3dfec;
+    padding: 5px 10px;
+    border-radius: 10px 10px 10px 0;
+    margin-right: 40px;
+  }
+  
+  .item p:nth-of-type(1) {
+    font-weight: bold;
+    font-style: italic;
+    margin: 0;
+  }
+  
+/* =============================================== */
 
 .unitMessageInput:focus {
     border: 1px solid #17a2b8;
-} */
+}
+.screen{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
 .input--style-4:focus{
     border: 2px solid #17a2b8;   
 }
@@ -136,12 +205,12 @@ h3.mine.profile{
     object-fit: cover;
     overflow: hidden;
 }
-#message::-webkit-scrollbar {
+#screen::-webkit-scrollbar, #message::-webkit-scrollbar {
     display: none;
   }
   
   /* Hide scrollbar for IE, Edge and Firefox */
-  #message {
+  #message, #screen {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }

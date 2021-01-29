@@ -3,10 +3,11 @@
 
     </div>
     <div class="profileform">
+        <form action="/profile" method="POST">
             <h1>Complete Your Profile</h1>
-            <label for="imageinputs" id="profileimage">Profile image:</label>
-            <label for="imageinput" id="browse"><i>  Browse...</i></label><br>
-            <input type="file" name="profileimage" id="imageinput" required><br>
+            {{!-- <label for="imageinputs" id="profileimage">Profile image:</label>
+            <label for="imageinput" id="browse"><i> Browse...</i></label><br>
+            <input type="file" name="profileimage" id="imageinput" required><br> --}}
             <div class="gallery1"></div>
             <div class="profileinput">
                 <div class="profileinputs">
@@ -24,8 +25,8 @@
                     <input type="date" name="birthday" id="birthday" required>
                 </div>
                 <div class="profileinputs">
-                    <label for="address">Address</label><br>
-                    <input type="text" name="address" id="address" required>
+                    <label for="address">State</label><br>
+                    <input type="text" name="state" id="address" required>
                 </div>
             </div>
             <div class="profileinput">
@@ -39,20 +40,14 @@
                 </div>
             </div>
             <div class="profileinput">
-                <div class="profileinputs">
-                    <label for="interests">Interests</label><br>
-                    <input type="text" name="interests" id="interests" required>
-                </div>
+
                 <div class="profileinputs">
                     <label for="languages">Languages</label><br>
                     <input type="text" name="languages" id="languages" required>
                 </div>
             </div>
             <div class="profileinput">
-                <div class="profileinputs">
-                    <label for="country">Country</label><br>
-                    <input type="text" name="country" id="country" required>
-                </div>
+
                 <div class="profileinputs">
                     <label for="landnumber">Number of lands Owned</label><br>
                     <input type="number" name="landnumber" id="landnumber" required>
@@ -76,90 +71,39 @@
                     <textarea name="aboutyou" id="aboutyou" cols="30" rows="10"></textarea>
                 </div>
             </div>
-            <label for="imageinputs">Farm images, if any:</label>
-            <label for="farmimageinput" id="browse"><i>  Browse...</i></label><br>
-            <input type="file" name="farmimage" id="farmimageinput" multiple required><br>
-            <div class="gallery"></div>
             <button type="submit" id="button">Create Profile</button>
+        </form>
     </div>
 </section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
-    $(function() {
-    // Multiple images preview in browser
-    var imagesPreview = function(input, placeToInsertImagePreview) {
+    $(function () {
+        // Multiple images preview in browser
+        var imagesPreview = function (input, placeToInsertImagePreview) {
 
-        if (input.files) {
-            var filesAmount = input.files.length;
+            if (input.files) {
+                var filesAmount = input.files.length;
 
-            for (i = 0; i < filesAmount; i++) {
-                var reader = new FileReader();
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
 
-                reader.onload = function(event) {
-                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                    reader.onload = function (event) {
+                        $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                    }
+
+                    reader.readAsDataURL(input.files[i]);
                 }
-
-                reader.readAsDataURL(input.files[i]);
             }
-        }
 
-    };
+        };
 
-    $('#farmimageinput').on('change', function() {
-        imagesPreview(this, 'div.gallery');
+        $('#farmimageinput').on('change', function () {
+            imagesPreview(this, 'div.gallery');
+        });
+        $('#imageinput').on('change', function () {
+            imagesPreview(this, 'div.gallery1');
+        });
     });
-    $('#imageinput').on('change', function() {
-        imagesPreview(this, 'div.gallery1');
-    });
-});
-    function saveDetail(){
-        var firstname = $('#firstname')
-        var lastname = $('#lastname')
-        var birthday = $('#birthday')
-        var address = $('#address')
-        var country = $('#country')
-        var phoneNumber = $('#phoneNumber')
-        var interests = $('#interests')
-        var expertise = $('#expertise')
-        var languages = $('#languages')
-        var landnumber = $('#landnumber')
-        var majorproduce = $('#majorproduce')
-        var yrexperience = $('#yrexperience')
-        var aboutyou = $('#aboutyou')
-        var profileimage = $('#imageinput')
-        var farmimage = $('#farmimageinput')
-          $.ajax({
-            url: `/profile/`,
-            type: "POST",
-            dataType: "json",
-            data: {
-                firstname,
-                lastname,
-                birthday,
-                address,
-                country,
-                phoneNumber,
-                interests,
-                expertise,
-                languages,
-                landnumber,
-                majorproduce,
-                yrexperience,
-                aboutyou,
-                profileimage,
-                farmimage
-            },
-            success: function (data) {
-                alert("Successfully Added information")
-            },
-            error: function (error) {
 
-            }
-    });
-    }
-    $("#button").click(function(){
-        console.log(1)
-        saveDetail();
-    })
 </script>

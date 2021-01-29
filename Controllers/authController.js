@@ -31,7 +31,7 @@ exports.signup = async (req, res, next) =>{
                     // console.log(user)
                     return res.redirect("back")
                 } else {
-                    req.logIn(user, (err) => {
+                    req.login(user, (err) => {
                     if (err) {
                             req.flash("error", "Something went wrong!");
                             return res.redirect("back")
@@ -43,33 +43,11 @@ exports.signup = async (req, res, next) =>{
                 }
               })(req, res, next);
             }
-            // return res.json({
-            //     user:createdUser
-            // })
-        // }else{
-        //     const newUser = new investor({
-        //         name: req.body.name,
-        //         username: req.body.username,
-        //         role: req.body.role,
-        //         location: req.body.location,
-        //     })
-        //     const createdUser = await investor.register(newUser, req.body.password);
-        //     return res.redirect("/auth/login") 
-        //     // return res.json({
-        //     //     user:createdUser
-        //     // })
-        // }
-        // //return res.redirect("/auth/login") 
-        // // return res.json({
-        // //     user:createdUser
-        // // })
+        
 }
 
 
 exports.login = async (req, res, next) => {
-//    const role = req.body.role
-   console.log(req.body)
-//    if(role === "investor"){
     passport.authenticate('local', function (error, user, info) {
         console.log(user)
         if (error) {
@@ -80,18 +58,30 @@ exports.login = async (req, res, next) => {
             // console.log(user)
             return res.redirect("back")
         } else {
-            req.logIn(user, (err) => {
+            req.login(user, (err) => {
             if (err) {
                     req.flash("error", "Something went wrong!");
                     return res.redirect("back")
                 } else {
-                    if (Profile.find({user_id:user._id})){
-                        req.flash("success", "Successfully logged In!");
-                        return res.redirect(`/profile/${user._id}`);
-                    }else {
+                    Profile.find({user_id:user._id}).then((data)=>{
+                        console.log(data)
+                        if(data.length == 0){
+                            req.flash("success", "Welcome! Kindly complete your profile");
+                            return res.redirect(`/profile`);
+                        }
+                        else if(user.role == 'investor'){
+                            req.flash("success", "Welcome!!!");
+                            return res.redirect(`/`);
+                        }else{
+                            req.flash("success", "Successfully logged In!");
+                            return res.redirect(`/profile/${data[0].user_id}`);
+                        }
+
+                    })
+                    .catch(err=>{
                         req.flash("success", "Welcome! Kindly complete your profile");
                         return res.redirect(`/profile`);
-                    }
+                    })
                 }
             })
         }

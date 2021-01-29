@@ -61,24 +61,27 @@
                             <section id="account">
                                 <h3 class="mine">Change User Information here</h3>
                                 <br>
-                                <form method="#">
+                                <form action="/profile/{{profile.user_id}}?_method=PATCH" method="POST">
                                     <div class="row row-space">
                                         <div class="col">
                                             <div class="input-group">
                                                 <label class="label">first name</label>
-                                                <input class="input--style-4" type="text" name="first_name">
+                                                <input class="input--style-4" type="text" value="{{profile.firstname}}"
+                                                    name="firstname">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="input-group">
                                                 <label class="label">last name</label>
-                                                <input class="input--style-4" type="text" name="last_name">
+                                                <input class="input--style-4" type="text" value="{{profile.lastname}}"
+                                                    name="lastname">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="input-group">
                                                 <label class="label">State</label>
-                                                <input class="input--style-4" type="text" name="state">
+                                                <input class="input--style-4" type="text" value="{{profile.state}}"
+                                                    name="state">
                                             </div>
                                         </div>
                                     </div>
@@ -86,13 +89,15 @@
                                         <div class="col">
                                             <div class="input-group">
                                                 <label class="label">Birthday</label>
-                                                <input class="input--style-4" type="date" id="birthday" name="birthday">
+                                                <input class="input--style-4" type="date" value="{{profile.birthday}}"
+                                                    id="birthday" name="birthday">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="input-group">
                                                 <label class="label">Phone Number</label>
-                                                <input class="input--style-4" type="text" name="phone">
+                                                <input class="input--style-4" type="text"
+                                                    value="{{profile.phoneNumber}}" name="phoneNumber">
                                             </div>
                                         </div>
                                     </div>
@@ -101,13 +106,15 @@
                                         <div class="col">
                                             <div class="input-group">
                                                 <label class="label">Years of Experience</label>
-                                                <input class="input--style-4" type="number" name="experience">
+                                                <input class="input--style-4" type="number"
+                                                    value="{{profile.yrexperience}}" name="yrexperience">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="input-group">
                                                 <label class="label">Languages</label>
-                                                <input class="input--style-4" type="text" name="lang">
+                                                <input class="input--style-4" type="text" value="{{profile.languages}}"
+                                                    name="languages">
                                             </div>
                                         </div>
 
@@ -116,35 +123,26 @@
                                         <div class="col">
                                             <div class="input-group">
                                                 <label class="label">Number of Lands Owned</label>
-                                                <input class="input--style-4" type="number" min="0" name="landsOwned">
+                                                <input class="input--style-4" type="number" min="0"
+                                                    value="{{profile.landnumber}}" name="landnumber">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="input-group">
                                                 <label class="label">Major Produce</label>
-                                                <input class="input--style-4" type="text" name="mProduce">
+                                                <input class="input--style-4" type="text"
+                                                    value="{{profile.majorproduce}}" name="majorproduce">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row row-space">
                                         <div class="input-group" style="margin: 0 15px">
                                             <label class="label">About You</label>
-                                            <textarea class="input--style-4 w-100" rows="3" name="about-you"></textarea>
+                                            <textarea class="input--style-4 w-100" rows="3"
+                                                name="aboutyou">{{profile.aboutyou}}</textarea>
                                         </div>
                                     </div>
                                     <br>
-                                    <!-- <div class="input-group">
-                                                    <label class="label">Subject</label>
-                                                    <div class="rs-select2 js-select-simple select--no-search">
-                                                        <select name="subject">
-                                                            <option disabled="disabled" selected="selected">Choose option</option>
-                                                            <option>Subject 1</option>
-                                                            <option>Subject 2</option>
-                                                            <option>Subject 3</option>
-                                                        </select>
-                                                        <div class="select-dropdown"></div>
-                                                    </div>
-                                                </div> -->
                                     <div class="">
                                         <button class="btn btn--blue btn-block" type="submit" style="background-color: #17a2b8;
     border-color: #17a2b8;">Submit</button>
@@ -224,19 +222,83 @@
                 </section>
             </section>
         </div>
-        <div class="col-md-4 display-hidden bg-dark" id="chatScreen">
-            <p onclick="closeChatScreen()" class="text-right color-white p-3 "><span class="cursor"> Close</span></p>
+        <div class="col-md-3 display-hidden bg-transparent p-3" id="chatScreen">
+            <div style="position: absolute;right: 20px;top: 20px;color: grey;z-index: 2;">
+                <i class="far fa-times-circle cursor" onclick="closeChatScreen()"
+                    style="font-size: 20px!important;"></i>
+            </div>
+            <article class="chatScreenn mr-3 mt-2">
+                <div class="bg-green p-3 header">
+                    <p class="color-white m-0">Your Chat with Mr Charles</p>
+                </div>
+                <div class="p-2 chatBody">
+                    <div class="screen" id="screen">
+
+                    </div>
+                    <input type="text" name="unitMessage" onkeypress="submitMessage(event)" class="unitMessageInput"
+                        placeholder="Enter your message here...">
+
+                </div>
+
+            </article>
+
         </div>
     </div>
 </section>
+<input type="hidden" value="{{currentUser.username}}" id="email">
 {{> footer}}
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
     integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+<!-- include firebase database -->
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+
 <script>
+    var user = document.getElementById('email').value
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyDIkIVDXtjgqJSCUi9muDuH7TI2xP3SfJ8",
+        authDomain: "agro-a83d3.firebaseapp.com",
+        projectId: "agro-a83d3",
+        storageBucket: "agro-a83d3.appspot.com",
+        messagingSenderId: "233371530556",
+        appId: "1:233371530556:web:716c7013b39116a8e95a39",
+        measurementId: "G-Q8EY10WZ71"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+
+    function formatAMPM(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = `${date.toDateString()} | ${hours}:${minutes}${ampm}`;
+        return strTime;
+    }
+
+    function scroll() {
+        var objDiv = document.getElementById("screen");
+        objDiv.scrollTop = objDiv.scrollHeight - objDiv.clientHeight;
+    }
     function closeChatScreen() {
         $("#settingsScreen").removeClass("col-md-9")
         $("#settingsScreen").addClass("col-md-12")
@@ -246,13 +308,43 @@
     }
     function submitMessage(e) {
         if (e.keyCode == 13) {
-            console.log(e.target.value)
+            // save in database
+            firebase.database().ref('test').push().set({
+                "sender": user,
+                "message": e.target.value,
+                "time": formatAMPM(new Date)
+            });
             e.target.value = ''
+            scroll();
+
         }
+
     }
+
+    firebase.database().ref('test').on("child_added", function (snapshot) {
+        var html = "";
+        // give each message a unique ID
+        if (snapshot.val().sender == user) {
+            html += "<div class='itemMe' id='message-" + snapshot.key + "'>";
+            html += "<p class='font-small'>" + snapshot.val().message + "</p>"
+            html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
+            html += "</div> <br>";
+        }
+
+        else {
+            html += "<div class='item' id='message-" + snapshot.key + "'>";
+            html += "<p class='font-small'>" + snapshot.val().message + "</p>"
+            html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
+            html += "</div> <br>";
+        }
+
+        document.getElementById("screen").innerHTML += html;
+        scroll()
+    });
+
     function showInput(e) {
         $('#settingsScreen').removeClass("col-md-12")
-        $('#settingsScreen').addClass("col-md-8")
+        $('#settingsScreen').addClass("col-md-9")
         $('#chatScreen').show("slow")
     }
     function fileUpload() {

@@ -2,24 +2,71 @@ const User = require("../models/user");
 const Profile = require("../models/profile");
 const upload = require("../utils/multer");
 const cloudinary = require("../utils/cloudinary");
+const generator = require('generate-password');
 
 exports.profileForm = async(req, res) => {
-    const presentUser = await User.findById({_id:req.user._id});
-    console.log(presentUser)
-    res.render('profileForm.hbs', {'User': presentUser })
+    res.render('profileForm.hbs')
 }
 
 exports.getOneProfile= async(req, res) =>{
-    // const userProfile = await Profile.findById({user_id: req.params.id});
-    // if(!userProfile){
-    //     req.flash('error', 'Something went wrong. Try again')
-    //     return res.redirect('back');
-    // }
-   return res.render('userSetting.hbs')
+    const userProfile = await Profile.findOne({user_id: req.params.id});
+    if(userProfile.length == 0){
+        req.flash('error', 'Something went wrong. Try again')
+        return res.redirect('back');
+    }
+    return res.render('userSetting.hbs', {profile: userProfile})
+}
+
+exports.retriveOneProfile= async(req, res) =>{
+    const userProfile = await Profile.findOne({user_id: req.params.id});
+    if(userProfile.length == 0){
+        req.flash('error', 'Something went wrong. Try again')
+        return res.redirect('back');
+    }
+    return res.status(200).json({
+        "status":"success",
+        "data":{
+            userProfile
+        }
+    })
 }
 
 
 
+
+
+
+exports.createMessage = async(req, res, next) => {
+    const mapper = [{"identity": req.params.id}, {"identity": req.user._id}]
+    const randomNumber = generator.generate({
+        length: 15,
+        numbers: true,
+    });
+    const message = {
+        sender: req.user.username,
+        receiver: req.body.email,
+        message: req.body.message,
+        node: randomNumber
+    }
+    let promises = mapper.map(async entry => {
+        const profile = await Profile.findOne({user_id: entry.identity})
+        profile.messages.push(message)
+    })
+    Promise.all(promises).then(async() => {
+        return res.status(200).json({
+            "status":"success",
+            "message":"Message sent successfully!"
+        })
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}
+
+
+
+
+// =================================================================================
 exports.getAllProfile= async(req, res) =>{
     const allUsersProfile = await Profile.find();
     if(!allUsersProfile){
@@ -47,45 +94,42 @@ exports.getAllFarmerProfile= async(req, res) =>{
         }
     })
 }
+// ==================================================================================================
 // // create profile
 
 exports.createProfile =  async(req, res)=>{
-    console.log(req.body)
-    const result = await cloudinary.uploader.upload(req.body.profileimage.file.path);
-    const Profile = new Profile({
+    // const result = await cloudinary.uploader.upload(req.body.profileimage.file.path);
+    await Profile.create({
         user_id: req.user._id,
         email: req.user.username,
         role: req.user.role,
-        profileimage: {avatar:result.secure_url,cloundinary_id: result.public_id},
+        profileimage: null
+        // {avatar:result.secure_url,cloundinary_id: result.public_id}
+        ,
         birthday: req.body.birthday,
-        address: req.body.address,
-        country: req.body.country,
+        state: req.body.state,
         phoneNumber: req.body.phone,
         firstname:req.body.firstname,
         lastname:req.body.lastname,
-        expertise:req.body.expertise,
         languages:req.body.languages,
         landnumber:req.body.landnumber,
         majorproduce:req.body.majorproduce,
         yrexperience:req.body.yrexperience,
-        aboutyou:req.body.aboutyou,  
-        interests:req.body.interests,   
+        aboutyou:req.body.aboutyou
     })
-    console.log(profile)
-    await Profile.save();
     req.flash('success', 'Profile updated successfully')
     res.redirect(`/profile/${user_id}`);
 };
 
 // // It can be used to update profile and also change users profile from pending to verified
 exports.updateProfile =  async(req, res)=>{
-    const updatedProfile = await Profile.findByIdAndUpdate({user_id: req.params.id}, req.body, {new: true});
+    const updatedProfile = await Profile.findOneAndUpdate({user_id: req.params.id}, req.body, {new: true});
     if(!updatedProfile){
         req.flash('error', 'Something went wrong. Try again')
         return res.redirect('back')
     }
     req.flash('success', 'Profile updated successfully')
-    res.redirect(`/profile/${user_id}`);
+    res.redirect(`/profile/${updatedProfile.user_id}`);
 };
 
 exports.updateProfileImage = async (req, res) => {
@@ -97,9 +141,6 @@ exports.updateProfileImage = async (req, res) => {
         }
         req.flash('success', 'Profile image updated successfully')
         res.redirect(`/profile/${user_id}`);
-        // return res.json({
-        //     updateProfile
-        // })
 }
 
 // posting images of the farm
@@ -115,7 +156,4 @@ exports.updateFarmImage = async (req, res) => {
         req.flash('success', 'Profile image updated successfully')
         res.redirect(`/profile/${user_id}`);
     }
-        // return res.json({
-        //     updateProfile
-        // })
 }

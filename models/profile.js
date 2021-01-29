@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const user= require('./user');
+const dateFormat = require("dateformat");
 
 const userProfileSchema = new mongoose.Schema({
     user_id: String,
@@ -10,9 +11,6 @@ const userProfileSchema = new mongoose.Schema({
     birthday:{
         type: Date
     },
-    address:{
-        type: String
-    },
     state:{
         type: String,
         required: [true, 'state is required'],
@@ -21,12 +19,6 @@ const userProfileSchema = new mongoose.Schema({
     phoneNumber:{
         type: String,
         trim:true
-    },
-    interests:{
-        type:String
-    },
-    expertise:{
-        type:String
     },
     languages:{
         type:String
@@ -67,9 +59,13 @@ const userProfileSchema = new mongoose.Schema({
     },
     messages:[{
         sender: String,
-        date:String,
+        receiver: String,
+        date: {
+            type: String,
+            default: dateFormat(Date.now(), 'fullDate')
+        },
         message:String,
-        sender_id:String
+        node:String
     }]
 });
 

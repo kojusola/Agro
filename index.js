@@ -9,32 +9,48 @@ const fs = require('fs')
 const passport = require("passport")
 const mongoose = require("mongoose")
 const session = require("express-session")
+const cookieParser = require("cookie-parser")
+const methodOverride = require("method-override")
 const MongoStore = require("connect-mongo")(session);
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
 
 const app = express();
 
-// app.use(express.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-// authentication and authorization with passport
 
+// authentication and authorization with passport
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, 'public/')))
+
+
+
+
+app.use(cookieParser());
 app.use(
 	session({
 	  secret: process.env.SESSION_SECRET,
 	  resave: false,
 	  saveUninitialized: false,
-	  cookie: { secure: false },
+	  cookie: { secure: false, maxAge: 60000 },
 	  store: new MongoStore({
 		mongooseConnection: mongoose.connection,
 	  }),
 	})
   );
-
+// app.use(favicon(__dirname + '/favicon.ico'));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use(methodOverride("_method"));
+
+app.use(function(req, res, next){
+	res.locals.currentUser = req.user;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
+	next();
+});
+
 
 //import routes
 const authRouter = require("./routes/authRouter")
@@ -53,18 +69,9 @@ const db = require("./connection");
 const router = require('./routes/authRouter');
 db.db()
 
-//middlewares
-// app.use(bodyParser.urlencoded({extended: true}));
-// app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, 'public/')));
 
-app.use(function(req, res, next){
-	res.locals.currentUser = req.user;
-	res.locals.error = req.flash("error");
-	res.locals.success = req.flash("success");
-	next();
-});
+
 
 
 //view engine setup
