@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const { login, userSignupForm, userLoginForm, signup, logout } = require("../controllers/authController")
+const { login, userSignupForm, userLoginForm, signup, logout } = require("./../controllers/authController")
 
 
 router.route('/login').get(userLoginForm).post(login)
