@@ -152,44 +152,23 @@
                             <section id="message" class="display-hidden">
                                 <h3 class="mine">Check and respond to your messages here</h3>
                                 <br>
-                                <div class="unitMessage">
-                                    <div class="openbtw">
-                                        <h3><strong><em>Charles Ugbana</em> </strong></h3>
-                                        <p class="text-muted font-smaller">4 days ago</p>
-                                    </div>
-                                    <p class="m-0 font-small-black">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                        elit.
-                                        Accusantium rerum
-                                        soluta quos
-                                        enim ab,
-                                        tempore consequuntur praesentium labore possimus
-                                        pariatur accusamus culpa voluptatibus quibusdam porro facilis ut tempora nemo
-                                        repudiandae?</p>
-                                    <small class="cursor profile" onclick="showInput(event)"><em
-                                            style="font-size: 10px !important; color:#17a2b8">Open Replies</em></small>
-                                    <hr>
-                                    {{!-- <div class="messageSenderBox display-hidden">
-                                        <input type="text" name="unitMessage" onkeypress="submitMessage(event)"
-                                            class="unitMessageInput" placeholder="Enter your message here...">
-                                        <hr>
-                                        <div class="profile-ml-4">
-                                            <div class="openbtw">
-                                                <h3><strong><em>Charles Ugbana</em> </strong></h3>
-                                                <p class="text-muted font-smaller">4 days ago</p>
-                                            </div>
-                                            <p class="m-0 font-small-black">Lorem ipsum, dolor sit amet consectetur
-                                                adipisicing
-                                                elit.
-                                                Accusantium rerum
-                                                soluta quos
-                                                enim ab,
-                                                tempore consequuntur praesentium labore possimus
-                                                pariatur accusamus culpa voluptatibus quibusdam porro facilis ut tempora
-                                                nemo
-                                                repudiandae?</p>
+                                <div id="messageScroll">
+                                    {{#each profile.messages }}
+                                    <div class="unitMessage">
+                                        <div class="openbtw">
+                                            <h5><strong><em>From: {{this.sender}} | To: {{this.receiver}}</em> </strong>
+                                            </h5>
+                                            <p class="text-muted font-smaller">{{this.date}}</p>
                                         </div>
-                                    </div> --}}
+                                        <p class="m-0 font-small-black">{{this.message}}</p>
+                                        <small class="cursor profile" onclick="showInput(event, `{{this.node}}`)"><em
+                                                style="font-size: 10px !important; color:#17a2b8">Open
+                                                Replies</em></small>
+                                        <hr>
 
+
+                                    </div>
+                                    {{/each}}
                                 </div>
 
                             </section>
@@ -246,6 +225,7 @@
     </div>
 </section>
 <input type="hidden" value="{{currentUser.username}}" id="email">
+<input type="hidden" id="node">
 {{> footer}}
 
 
@@ -306,46 +286,77 @@
         $("#chatScreen").hide()
 
     }
+
+
     function submitMessage(e) {
         if (e.keyCode == 13) {
+            const node = document.getElementById("node").value
             // save in database
-            firebase.database().ref('test').push().set({
+            firebase.database().ref(node).push().set({
                 "sender": user,
                 "message": e.target.value,
                 "time": formatAMPM(new Date)
             });
             e.target.value = ''
-            scroll();
+            firebase.database().ref(node).once("child_added", function (snapshot) {
+                var html = "";
+                // give each message a unique ID
+                if (snapshot.val().sender == user) {
+                    html += "<div class='itemMe' id='message-" + snapshot.key + "'>";
+                    html += "<p class='font-small'>" + snapshot.val().message + "</p>"
+                    html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
+                    html += "</div> <br>";
+                }
+
+                else {
+                    html += "<div class='item' id='message-" + snapshot.key + "'>";
+                    html += "<p class='font-small'>" + snapshot.val().message + "</p>"
+                    html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
+                    html += "</div> <br>";
+                }
+
+                document.getElementById("screen").innerHTML += html;
+                scroll()
+            });
+
 
         }
 
     }
 
-    firebase.database().ref('test').on("child_added", function (snapshot) {
-        var html = "";
-        // give each message a unique ID
-        if (snapshot.val().sender == user) {
-            html += "<div class='itemMe' id='message-" + snapshot.key + "'>";
-            html += "<p class='font-small'>" + snapshot.val().message + "</p>"
-            html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
-            html += "</div> <br>";
-        }
 
-        else {
-            html += "<div class='item' id='message-" + snapshot.key + "'>";
-            html += "<p class='font-small'>" + snapshot.val().message + "</p>"
-            html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
-            html += "</div> <br>";
-        }
 
-        document.getElementById("screen").innerHTML += html;
-        scroll()
-    });
-
-    function showInput(e) {
+    function showInput(e, node) {
         $('#settingsScreen').removeClass("col-md-12")
         $('#settingsScreen').addClass("col-md-9")
         $('#chatScreen').show("slow")
+        document.getElementById("node").value = node
+
+        firebase.database().ref(node).once("value", function (snapshots) {
+            var html = "";
+            // give each message a unique ID
+            snapshots.forEach(function (snapshot) {
+                if (snapshot.val().sender == user) {
+                    html += "<div class='itemMe' id='message-" + snapshot.key + "'>";
+                    html += "<p class='font-small'>" + snapshot.val().message + "</p>"
+                    html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
+                    html += "</div> <br>";
+                }
+
+                else {
+                    html += "<div class='item' id='message-" + snapshot.key + "'>";
+                    html += "<p class='font-small'>" + snapshot.val().message + "</p>"
+                    html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
+                    html += "</div> <br>";
+                }
+
+            })
+
+            document.getElementById("screen").innerHTML = html;
+            scroll()
+
+        });
+
     }
     function fileUpload() {
         $("#inputFile").click()

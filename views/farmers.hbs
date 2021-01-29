@@ -102,6 +102,7 @@
 <script>
     function sendMessageToFarmer() {
         const id = document.getElementById('identity').value
+        const email = document.getElementById('emaill').value
         const mes = document.getElementById('mes').value
         if (mes == '' || id == '') {
             return
@@ -112,7 +113,7 @@
             method: 'POST',
             data: {
                 message: mes,
-                email: id
+                email: email
             },
             success: function (data) {
                 document.getElementById("response").textContent = data.message
@@ -154,7 +155,7 @@
                 document.getElementById("exp").textContent = yrexperience
                 document.getElementById("produce").textContent = majorproduce
                 document.getElementById("identity").value = user_id
-                document.getElementById(emaill).value = email
+                document.getElementById("emaill").value = email
             },
             error: function () {
                 console.log("Something went wrong!!!")

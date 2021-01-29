@@ -3,6 +3,7 @@ const Profile = require("../models/profile");
 const upload = require("../utils/multer");
 const cloudinary = require("../utils/cloudinary");
 const generator = require('generate-password');
+const dateFormat = require("dateformat");
 
 exports.profileForm = async(req, res) => {
     res.render('profileForm.hbs')
@@ -46,13 +47,15 @@ exports.createMessage = async(req, res, next) => {
         sender: req.user.username,
         receiver: req.body.email,
         message: req.body.message,
-        node: randomNumber
+        node: randomNumber,
+        date: dateFormat(Date.now(), 'fullDate')
     }
     let promises = mapper.map(async entry => {
         const profile = await Profile.findOne({user_id: entry.identity})
         profile.messages.push(message)
+        profile.save()
     })
-    Promise.all(promises).then(async() => {
+    Promise.all(promises).then(async(data) => {
         return res.status(200).json({
             "status":"success",
             "message":"Message sent successfully!"

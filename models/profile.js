@@ -60,10 +60,7 @@ const userProfileSchema = new mongoose.Schema({
     messages:[{
         sender: String,
         receiver: String,
-        date: {
-            type: String,
-            default: dateFormat(Date.now(), 'fullDate')
-        },
+        date: String,
         message:String,
         node:String
     }]
