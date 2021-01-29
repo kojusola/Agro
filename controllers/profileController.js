@@ -38,7 +38,7 @@ exports.retriveOneProfile= async(req, res) =>{
 
 
 exports.createMessage = async(req, res, next) => {
-    const mapper = [{"identity": req.params.id}, {"identity": req.user._id}]
+    const mapper = [{"identity": req.params.id}, {"identity": JSON.stringify(req.user._id)}]
     const randomNumber = generator.generate({
         length: 15,
         numbers: true,
