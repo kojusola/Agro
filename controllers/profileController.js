@@ -38,7 +38,6 @@ exports.retriveOneProfile= async(req, res) =>{
 
 
 exports.createMessage = async(req, res, next) => {
-    console.log(req.user)
     const mapper = [{"identity": req.params.id}, {"identity": JSON.stringify(req.user._id)}]
     const randomNumber = generator.generate({
         length: 15,
@@ -53,6 +52,7 @@ exports.createMessage = async(req, res, next) => {
     }
     let promises = mapper.map(async entry => {
         const profile = await Profile.findOne({user_id: entry.identity})
+        console.log(profile)
         profile.messages.push(message)
         profile.save()
     })
