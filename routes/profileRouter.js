@@ -6,9 +6,9 @@ const {isLoggedIn, restrictTo} = require("../middleware/authorization")
 
 
 router.route('/').get(isLoggedIn, profileForm).post(isLoggedIn, createProfile);
-router.route('/all').get(getAllProfile);
-router.route('/:id').get(getOneProfile).patch(updateProfile);
-router.route('/:id/retrieve').get(retriveOneProfile)
+router.route('/all').get(isLoggedIn,getAllProfile);
+router.route('/:id').get(isLoggedIn,getOneProfile).patch(isLoggedIn,updateProfile);
+router.route('/:id/retrieve').get(isLoggedIn,retriveOneProfile)
 router.route('/:id/message').post(isLoggedIn, createMessage)
 router.route('/:id/pimage').post(upload.single('image'),updateProfileImage);
 router.route('/:id/fimage').post(upload.array('image'),updateProfileImage);
