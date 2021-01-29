@@ -298,7 +298,7 @@
                 "time": formatAMPM(new Date)
             });
             e.target.value = ''
-            firebase.database().ref(node).once("child_added", function (snapshot) {
+            firebase.database().ref(node).on("child_added", function (snapshot) {
                 var html = "";
                 // give each message a unique ID
                 if (snapshot.val().sender == user) {
