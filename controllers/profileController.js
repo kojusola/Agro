@@ -120,8 +120,15 @@ exports.createProfile =  async(req, res)=>{
         yrexperience:req.body.yrexperience,
         aboutyou:req.body.aboutyou
     })
-    req.flash('success', 'Profile updated successfully')
-    res.redirect(`/profile/${user_id}`);
+    if(req.user.role == 'investor'){
+        req.flash('success', 'Profile updated successfully')
+        res.redirect(`/`);
+
+    }else{
+        req.flash('success', 'Profile updated successfully')
+        res.redirect(`/profile/${req.user._id}`);
+    }
+    
 };
 
 // // It can be used to update profile and also change users profile from pending to verified
