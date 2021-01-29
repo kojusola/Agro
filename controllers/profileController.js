@@ -102,7 +102,7 @@ exports.getAllFarmerProfile= async(req, res) =>{
 
 exports.createProfile =  async(req, res)=>{
     // const result = await cloudinary.uploader.upload(req.body.profileimage.file.path);
-    await Profile.create({
+    const prof = await Profile.create({
         user_id: req.user._id,
         email: req.user.username,
         role: req.user.role,
@@ -126,7 +126,7 @@ exports.createProfile =  async(req, res)=>{
 
     }else{
         req.flash('success', 'Profile updated successfully')
-        res.redirect(`/profile/${req.user._id}`);
+        res.redirect(`/profile/${prof.user_id}`);
     }
     
 };
