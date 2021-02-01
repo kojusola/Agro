@@ -176,6 +176,7 @@ h3.mine.profile{
 .unitMessageInput:focus {
     border: 1px solid #17a2b8;
 }
+
 .screen{
     display: flex;
     flex-direction: column;
