@@ -36,13 +36,8 @@
 
 .banner{
     height: 60vh;
-<<<<<<< Updated upstream
     background-image: url("../img/landfarm.jpg");
     background-position:bottom;
-=======
-    background-image: url("./../img/tomato-banner.jpg");
-    background-position: center;
->>>>>>> Stashed changes
     background-size: auto;
     background-repeat: no-repeat;
     margin: 1.5rem;
