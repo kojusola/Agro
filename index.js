@@ -57,11 +57,18 @@ app.use(function(req, res, next){
 
 const profileRouter = require("./routes/profileRouter")
 const farmerRouter = require("./routes/farmerRouter")
+<<<<<<< Updated upstream
 const landRouter = require("./routes/landingPageRouter")
 const authRouter = require("./routes/authRouter")
 
 app.use('/',landRouter)
 app.use('/auth', authRouter)
+=======
+const homeRouter = require("./routes/homeRouter")
+
+
+app.use('/', homeRouter)
+>>>>>>> Stashed changes
 app.use('/profile', profileRouter)
 app.use('/farmers', farmerRouter)
 
