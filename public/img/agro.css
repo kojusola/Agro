@@ -36,7 +36,7 @@
 
 .banner{
     height: 60vh;
-    background-image: url("img/landfarm.jpg");
+    background-image: url("./landfarm.jpg");
     background-position:bottom;
     background-size: auto;
     background-repeat: no-repeat;
