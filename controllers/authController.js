@@ -6,15 +6,27 @@ const mongoose = require('mongoose')
 
 
 exports.userLoginForm = (req, res) => {
+    if (req.user) {
+        req.flash("error", "Already signed in!");
+        return res.redirect("back")
+    }
     res.render('signin.hbs')
 }
 
 exports.userSignupForm = (req, res) => {
+    if (req.user) {
+        req.flash("error", "Currently signed in. Please log out!");
+        return res.redirect("back")
+    }
     res.render('signup.hbs')
 }
 
 
-exports.signup = async (req, res, next) =>{
+exports.signup = async (req, res, next) => {
+    if (req.user) {
+        req.flash("error", "Already signed in!");
+        return res.redirect("back")
+    }
             const newUser = new user({
                 username: req.body.username,
                 role: req.body.role
@@ -48,6 +60,10 @@ exports.signup = async (req, res, next) =>{
 
 
 exports.login = async (req, res, next) => {
+    if (req.user) {
+        req.flash("error", "Already signed in!");
+        return res.redirect("back")
+    }
     passport.authenticate('local', function (error, user, info) {
         console.log(user)
         if (error) {

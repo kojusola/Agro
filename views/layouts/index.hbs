@@ -15,12 +15,7 @@
     <link rel="stylesheet" href="/css/profileForm.css">
     <link rel="stylesheet" href="/css/agro.css">
     <style>
-        .single-row {
-            margin-top: 60px;
-            z-index: 1030;
-            position: fixed !important;
-            width: 100%;
-        }
+       
     </style>
 </head>
 
@@ -28,7 +23,7 @@
 
     {{#if error }}
     {{#if error.length }}
-    <div class="alert alert-danger single-row" role="alert">
+    <div class="alert alert-danger single-row alert-mine" role="alert">
         <span>
             {{error}}
         </span>
@@ -38,7 +33,7 @@
     {{/if}}
     {{#if success }}
     {{#if success.length }}
-    <div class="alert alert-success single-row" role="alert">
+    <div class="alert alert-success single-row alert-mine" role="alert">
         <span>
             {{success}}
         </span>

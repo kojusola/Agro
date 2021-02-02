@@ -5,7 +5,12 @@ const cloudinary = require("../utils/cloudinary");
 const generator = require('generate-password');
 const dateFormat = require("dateformat");
 
-exports.profileForm = async(req, res) => {
+exports.profileForm = async (req, res) => {
+    const prof = Profile.findOne({ user_id: req.user._id })
+    if (prof.length == 0) {
+        req.flash('error', 'You have a profile already. Update your profile from account settings.')
+        return res.redirect('back');
+    }
     res.render('profileForm.hbs')
 }
 

@@ -7,3 +7,13 @@
     max-height: 85vh;
     margin-bottom: 40px;
 }
+ .alert-mine {
+        width: 250px;
+        position: fixed;
+        right: 10px;
+        top: 60px;
+        z-index: 1030;
+      }
+.alert-mine span{
+    display: contents;
+}
