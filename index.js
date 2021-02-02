@@ -59,11 +59,13 @@ const profileRouter = require("./routes/profileRouter")
 const farmerRouter = require("./routes/farmerRouter")
 const landRouter = require("./routes/landingPageRouter")
 const authRouter = require("./routes/authRouter")
+const livechatRouter = require("./routes/liveChatRouter")
 
 app.use('/',landRouter)
 app.use('/auth', authRouter)
 app.use('/profile', profileRouter)
 app.use('/farmers', farmerRouter)
+app.use('/livechat', livechatRouter)
 
 
 //database connection

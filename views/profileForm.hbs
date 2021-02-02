@@ -1,109 +1,91 @@
-<section class="bodyP">
-    <div class="farmimg">
+<div class="row">
+    <div class="col-md-6" id="profileimage"></div>
+    <div class="col-md-6" id="profileform">
+        <div class="profileform">
+            <form action="/profile/{{profile.user_id}}?_method=PATCH" method="POST">
+                <h2>Complete your profile</h2>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="input-group">
+                            <label class="label">first name</label>
+                            <input class="input--style-4" type="text" value="{{profile.firstname}}" name="firstname">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <label class="label">last name</label>
+                            <input class="input--style-4" type="text" value="{{profile.lastname}}" name="lastname">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <label class="label">State</label>
+                            <input class="input--style-4" type="text" value="{{profile.state}}" name="state">
+                        </div>
+                    </div>
+                </div>
+                <div class=" form-row">
+                    <div class="col">
+                        <div class="input-group">
+                            <label class="label">Birthday</label>
+                            <input class="input--style-4" type="date" value="{{profile.birthday}}" id="birthday"
+                                name="birthday">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <label class="label">Phone Number</label>
+                            <input class="input--style-4" type="text" value="{{profile.phoneNumber}}"
+                                name="phoneNumber">
+                        </div>
+                    </div>
+                </div>
 
+                <div class="form-row ">
+                    <div class="col">
+                        <div class="input-group">
+                            <label class="label">Years of Experience</label>
+                            <input class="input--style-4" type="number" value="{{profile.yrexperience}}"
+                                name="yrexperience">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <label class="label">Languages</label>
+                            <input class="input--style-4" type="text" value="{{profile.languages}}" name="languages">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="input-group">
+                            <label class="label">Number of Lands Owned</label>
+                            <input class="input--style-4" type="number" min="0" value="{{profile.landnumber}}"
+                                name="landnumber">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <label class="label">Major Produce</label>
+                            <input class="input--style-4" type="text" value="{{profile.majorproduce}}"
+                                name="majorproduce">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group" style="margin: 0 15px">
+                        <label class="label">About You</label>
+                        <textarea class="input--style-4 w-100" rows="3" name="aboutyou">{{profile.aboutyou}}</textarea>
+                    </div>
+                </div>
+                <br>
+                <div class="">
+                    <button class="btn btn--blue btn-block" type="submit" style="background-color: #17a2b8;
+                    border-color: #17a2b8;">Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="profileform">
-        <form action="/profile" method="POST">
-            <h1>Complete Your Profile</h1>
-            {{!-- <label for="imageinputs" id="profileimage">Profile image:</label>
-            <label for="imageinput" id="browse"><i> Browse...</i></label><br>
-            <input type="file" name="profileimage" id="imageinput" required><br> --}}
-            <div class="gallery1"></div>
-            <div class="profileinput">
-                <div class="profileinputs">
-                    <label for="firstname">First Name</label><br>
-                    <input type="text" name="firstname" id="firstname" required>
-                </div>
-                <div class="profileinputs">
-                    <label for="lastname">Last Name</label><br>
-                    <input type="text" name="lastname" id="lastname" required>
-                </div>
-            </div>
-            <div class="profileinput">
-                <div class="profileinputs">
-                    <label for="birthday">Birthday</label><br>
-                    <input type="date" name="birthday" id="birthday" required>
-                </div>
-                <div class="profileinputs">
-                    <label for="address">State</label><br>
-                    <input type="text" name="state" id="address" required>
-                </div>
-            </div>
-            <div class="profileinput">
-                <div class="profileinputs">
-                    <label for="expertise">Expertise</label><br>
-                    <input type="text" name="expertise" id="expertise" required>
-                </div>
-                <div class="profileinputs">
-                    <label for="phonenumber">Phone Number</label><br>
-                    <input type="text" name="phonenumber" id="phonenumber" required>
-                </div>
-            </div>
-            <div class="profileinput">
 
-                <div class="profileinputs">
-                    <label for="languages">Languages</label><br>
-                    <input type="text" name="languages" id="languages" required>
-                </div>
-            </div>
-            <div class="profileinput">
-
-                <div class="profileinputs">
-                    <label for="landnumber">Number of lands Owned</label><br>
-                    <input type="number" name="landnumber" id="landnumber" required>
-                </div>
-            </div>
-            {{#ifeq User.role 'farmer' }}
-            <div class="profileinput">
-                <div class="profileinputs">
-                    <label for="majorproduce">Major Produce</label><br>
-                    <input type="text" name="majorproduce" id="majorproduce" required>
-                </div>
-                <div class="profileinputs">
-                    <label for="yrexperience">Years of Experience</label><br>
-                    <input type="number" name="yrexperience" id="yrexperience" required>
-                </div>
-            </div>
-            {{/ifeq}}
-            <div class="profileinput">
-                <div class="profileinputs">
-                    <label for="aboutyou">About you</label><br>
-                    <textarea name="aboutyou" id="aboutyou" cols="30" rows="10"></textarea>
-                </div>
-            </div>
-            <button type="submit" id="button">Create Profile</button>
-        </form>
-    </div>
-</section>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
-    $(function () {
-        // Multiple images preview in browser
-        var imagesPreview = function (input, placeToInsertImagePreview) {
-
-            if (input.files) {
-                var filesAmount = input.files.length;
-
-                for (i = 0; i < filesAmount; i++) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (event) {
-                        $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-                    }
-
-                    reader.readAsDataURL(input.files[i]);
-                }
-            }
-
-        };
-
-        $('#farmimageinput').on('change', function () {
-            imagesPreview(this, 'div.gallery');
-        });
-        $('#imageinput').on('change', function () {
-            imagesPreview(this, 'div.gallery1');
-        });
-    });
-
-</script>
+</div>

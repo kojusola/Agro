@@ -147,7 +147,8 @@ h3.mine.profile{
     background: #d7e787;
     padding: 5px 10px;
     border-radius: 10px 10px 0 10px;
-    margin-left: 40px;
+    margin-left: 70px;
+    word-break: break-all;
   }
   .itemMe p:nth-of-type(1) {
     font-weight: bold;
@@ -155,14 +156,17 @@ h3.mine.profile{
     margin: 0;
   }
  
-
+.font-small{
+    font-size: 13px!important;
+}
   .item {
     align-self: flex-start;
     text-align: left;
     background: #e3dfec;
     padding: 5px 10px;
     border-radius: 10px 10px 10px 0;
-    margin-right: 40px;
+    margin-right: 70px;
+    word-break: break-all;
   }
   
   .item p:nth-of-type(1) {

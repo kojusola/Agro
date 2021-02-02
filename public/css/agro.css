@@ -1,7 +1,9 @@
 .support{
     border: 1px solid red;
 }
-
+html, body{
+    width: 100vw;
+}
 *{
     padding: 0;
     margin: 0;
@@ -35,12 +37,11 @@
 }
 
 .banner{
-    height: 60vh;
+    height: 65vh;
     background-image: url("../img/landfarm.jpg");
     background-position:bottom;
     background-size: auto;
     background-repeat: no-repeat;
-    margin: 1.5rem;
 }
 
 .banner-content{
@@ -83,29 +84,15 @@
     /* margin: 0.5rem 00; */
 }
 
-.objectives{
-    height: 40vh;
-}
 
-.obj-abt-content{
-    height: 55vh;
-    width: 100%;
-    background-color: rgb(238, 238, 238);
-    margin: 1.5rem auto;
-    height: 55vh;
-}
 
 .reviews-outer{
     margin: 1.5rem auto;
 }
 
-.reviews{
-    height: 30vh;
-}
 
 .card-whole{
     width: 20rem;
-    max-height: 21vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,8 +100,6 @@
 }
 
 .pic-whole{
-    width: 30%;
-    max-height: 38vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -134,16 +119,12 @@
 
 .card-statement{
     width: 20rem;
-    height: 28vh;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 1rem;
 }
 
-.statement{
-    height: 50vh;
-}
 
 .contact-us-button, .obj-abt-main-content blockquote{
     margin: 0%;
@@ -154,8 +135,7 @@
 }
 
 .obj-abt-main-content{
-    width: 45%;
-    height: 40vh;
+   
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -178,17 +158,15 @@
     justify-content: flex-start;
 }
 
-.obj-img, .abt-img{
-    height: 40vh;
-    width: 40% ;
-    object-fit: cover;
-    object-position: center;
-}
+
 
 .pro-img{
-    max-height: 18vh;
     object-fit: cover;
     object-position: center;
+    height: 120px;
+}
+.obj-img,.abt-img{
+    height: 300px;
 }
 
 .obj-abt-main-content h4{

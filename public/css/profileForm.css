@@ -22,6 +22,11 @@
     padding: 50px 30px;
     font-size: 15px;
     margin: 20px 0;
+    border: 2px solid #6c757d;
+    align-items: center;
+    text-align: center;
+    border-radius: 18px;
+    box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.19);
 }
 .profileinput{
     display: flex;
@@ -32,21 +37,8 @@
     margin: 10px 0;
 }
 
-.profileinputs textarea{
-    width: 754px;
-    border: 1px solid #6c757d;
-    margin: 10px 0;
-}
 
-.profileinputs input{
-    width: 350px;
-    height: 45px;
-    border: 1px solid #6c757d;
-    border-radius: 3px;
-    margin: 15px auto;
-    margin-right: 40px;
-    text-align: center;
-}
+
 .profileform h1{
     font-family: 'Raleway', sans-serif;
     font-size: 30px;
@@ -95,6 +87,26 @@
 }
 .farmerdetails{
     display:none;
+}
+#profileimage{
+    height: 100vh;
+    position: fixed;
+    background-image: url(../img/Farms.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+#profileform{
+    position: absolute;
+    right: 0;
+}
+@media only screen and (max-width: 1000px){
+    #profileimage{
+        display: none;
+    }
+    .col-md-6#profileform{
+        max-width: 100%!important;
+    }
 }
 /*
 @media screen and (max-width:1525px) and (min-width:1300px){

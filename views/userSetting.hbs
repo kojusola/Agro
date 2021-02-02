@@ -6,207 +6,200 @@
 </style>
 <br>
 <section class="cover-bg mt-5 pb-5" style="width: 100vw;">
-    <div class="row mx-0">
-        <div class="col-md-12" id="settingsScreen">
-            <section class="container user-page">
-                <section class="row">
-                    <div class="col-md-4 py-4">
-                        <div class="sidebar-nav p-3 active" id="accountSettings">
-                            <div>
-                                <h3 class="justify-content-start mine">Account Setting</h3>
-                                <p class="text-muted">Details about your personal and professional information</p>
-                            </div>
+    <div id="settingsScreen">
+        <section class="container user-page">
+            <section class="row">
+                <div class="col-md-4 py-4">
+                    <div class="sidebar-nav p-3 active" id="accountSettings">
+                        <div>
+                            <h3 class="justify-content-start mine">Account Setting</h3>
+                            <p class="text-muted">Details about your personal and professional information</p>
                         </div>
-                        <div class="sidebar-nav p-3" id="messages">
-                            <div>
-                                <h3 class="justify-content-start mine">Messages</h3>
-                                <p class="text-muted">Important messages and business proposals</p>
-                            </div>
+                    </div>
+                    <div class="sidebar-nav p-3" id="messages">
+                        <div>
+                            <h3 class="justify-content-start mine">Messages</h3>
+                            <p class="text-muted">Important messages and business proposals</p>
                         </div>
-                        <div class="sidebar-nav p-3" id="password">
-                            <div>
-                                <h3 class="justify-content-start mine">password & security</h3>
-                                <p class="text-muted">Keep your account secure</p>
+                    </div>
+                    <div class="sidebar-nav p-3" id="password">
+                        <div>
+                            <h3 class="justify-content-start mine">password & security</h3>
+                            <p class="text-muted">Keep your account secure</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 py-4">
+                    <div class="profile-heading p-3">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-md-3 centered">
+                                        <img src="/img/fff.jpeg" alt="d-128x128" id="profile-picture" class="support">
+                                    </div>
+                                    <div class="col-md-6 centered-left">
+                                        <div class="details">
+                                            <h3 class="mine">Upload a New Photo</h3>
+                                            <p class="text-muted"><em>Profile-pic.jpg</em></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 centered">
+                                <form action="/" id="pixForm" method="POST" class="display-hidden">
+                                    <input type="file" name="profilePix" id="inputFile" onchange="fileSelect()">
+                                </form>
+                                <button type="button" class="btn btn-info justify-content-end update-button"
+                                    onclick="fileUpload()">Update</button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8 py-4">
-                        <div class="profile-heading p-3">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="row">
-                                        <div class="col-md-3 centered">
-                                            <img src="/img/fff.jpeg" alt="d-128x128" id="profile-picture"
-                                                class="support">
+
+                    <div class="user-information p-5">
+                        <section id="account">
+                            <h3 class="mine">Change User Information here</h3>
+                            <br>
+                            <form action="/profile/{{profile.user_id}}?_method=PATCH" method="POST">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label class="label">first name</label>
+                                            <input class="input--style-4" type="text" value="{{profile.firstname}}"
+                                                name="firstname">
                                         </div>
-                                        <div class="col-md-6 centered-left">
-                                            <div class="details">
-                                                <h3 class="mine">Upload a New Photo</h3>
-                                                <p class="text-muted"><em>Profile-pic.jpg</em></p>
-                                            </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label class="label">last name</label>
+                                            <input class="input--style-4" type="text" value="{{profile.lastname}}"
+                                                name="lastname">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label class="label">State</label>
+                                            <input class="input--style-4" type="text" value="{{profile.state}}"
+                                                name="state">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 centered">
-                                    <form action="/" id="pixForm" method="POST" class="display-hidden">
-                                        <input type="file" name="profilePix" id="inputFile" onchange="fileSelect()">
-                                    </form>
-                                    <button type="button" class="btn btn-info justify-content-end update-button"
-                                        onclick="fileUpload()">Update</button>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label class="label">Birthday</label>
+                                            <input class="input--style-4" type="date" value="{{profile.birthday}}"
+                                                id="birthday" name="birthday">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label class="label">Phone Number</label>
+                                            <input class="input--style-4" type="text" value="{{profile.phoneNumber}}"
+                                                name="phoneNumber">
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label class="label">Years of Experience</label>
+                                            <input class="input--style-4" type="number" value="{{profile.yrexperience}}"
+                                                name="yrexperience">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label class="label">Languages</label>
+                                            <input class="input--style-4" type="text" value="{{profile.languages}}"
+                                                name="languages">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label class="label">Number of Lands Owned</label>
+                                            <input class="input--style-4" type="number" min="0"
+                                                value="{{profile.landnumber}}" name="landnumber">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label class="label">Major Produce</label>
+                                            <input class="input--style-4" type="text" value="{{profile.majorproduce}}"
+                                                name="majorproduce">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="input-group" style="margin: 0 15px">
+                                        <label class="label">About You</label>
+                                        <textarea class="input--style-4 w-100" rows="3"
+                                            name="aboutyou">{{profile.aboutyou}}</textarea>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="">
+                                    <button class="btn btn--blue btn-block" type="submit" style="background-color: #17a2b8;
+    border-color: #17a2b8;">Submit</button>
+                                </div>
+                            </form>
+                        </section>
+                        <section id="message" class="display-hidden">
+                            <h3 class="mine">Check and respond to your messages here</h3>
+                            <br>
+                            <div id="messageScroll">
+                                {{#each profile.messages }}
+                                <div class="unitMessage">
+                                    <div class="openbtw">
+                                        <h5><em>From: {{this.sender}} | To: {{this.receiver}}</em>
+                                        </h5>
+                                        <p class="text-muted font-smaller">{{this.date}}</p>
+                                    </div>
+                                    <p class="m-0 font-small-black">{{this.message}}</p>
+                                    <small class="cursor profile" onclick="showInput(event, `{{this.node}}`)"><em
+                                            style="font-size: 10px !important; color:#17a2b8">Open
+                                            Chat</em></small>
+                                    <hr>
+
+
+                                </div>
+                                {{/each}}
                             </div>
-                        </div>
 
-                        <div class="user-information p-5">
-                            <section id="account">
-                                <h3 class="mine">Change User Information here</h3>
-                                <br>
-                                <form action="/profile/{{profile.user_id}}?_method=PATCH" method="POST">
-                                    <div class="row row-space">
-                                        <div class="col">
-                                            <div class="input-group">
-                                                <label class="label">first name</label>
-                                                <input class="input--style-4" type="text" value="{{profile.firstname}}"
-                                                    name="firstname">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="input-group">
-                                                <label class="label">last name</label>
-                                                <input class="input--style-4" type="text" value="{{profile.lastname}}"
-                                                    name="lastname">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="input-group">
-                                                <label class="label">State</label>
-                                                <input class="input--style-4" type="text" value="{{profile.state}}"
-                                                    name="state">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row row-space">
-                                        <div class="col">
-                                            <div class="input-group">
-                                                <label class="label">Birthday</label>
-                                                <input class="input--style-4" type="date" value="{{profile.birthday}}"
-                                                    id="birthday" name="birthday">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="input-group">
-                                                <label class="label">Phone Number</label>
-                                                <input class="input--style-4" type="text"
-                                                    value="{{profile.phoneNumber}}" name="phoneNumber">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row row-space ">
-                                        <div class="col">
-                                            <div class="input-group">
-                                                <label class="label">Years of Experience</label>
-                                                <input class="input--style-4" type="number"
-                                                    value="{{profile.yrexperience}}" name="yrexperience">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="input-group">
-                                                <label class="label">Languages</label>
-                                                <input class="input--style-4" type="text" value="{{profile.languages}}"
-                                                    name="languages">
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="row row-space ">
-                                        <div class="col">
-                                            <div class="input-group">
-                                                <label class="label">Number of Lands Owned</label>
-                                                <input class="input--style-4" type="number" min="0"
-                                                    value="{{profile.landnumber}}" name="landnumber">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="input-group">
-                                                <label class="label">Major Produce</label>
-                                                <input class="input--style-4" type="text"
-                                                    value="{{profile.majorproduce}}" name="majorproduce">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row row-space">
-                                        <div class="input-group" style="margin: 0 15px">
-                                            <label class="label">About You</label>
-                                            <textarea class="input--style-4 w-100" rows="3"
-                                                name="aboutyou">{{profile.aboutyou}}</textarea>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="">
-                                        <button class="btn btn--blue btn-block" type="submit" style="background-color: #17a2b8;
-    border-color: #17a2b8;">Submit</button>
-                                    </div>
-                                </form>
-                            </section>
-                            <section id="message" class="display-hidden">
-                                <h3 class="mine">Check and respond to your messages here</h3>
-                                <br>
-                                <div id="messageScroll">
-                                    {{#each profile.messages }}
-                                    <div class="unitMessage">
-                                        <div class="openbtw">
-                                            <h5><strong><em>From: {{this.sender}} | To: {{this.receiver}}</em> </strong>
-                                            </h5>
-                                            <p class="text-muted font-smaller">{{this.date}}</p>
-                                        </div>
-                                        <p class="m-0 font-small-black">{{this.message}}</p>
-                                        <small class="cursor profile" onclick="showInput(event, `{{this.node}}`)"><em
-                                                style="font-size: 10px !important; color:#17a2b8">Open
-                                                Replies</em></small>
-                                        <hr>
-
-
-                                    </div>
-                                    {{/each}}
+                        </section>
+                        <section id="security" class="display-hidden">
+                            <h3 class="mine">Change your account password here</h3>
+                            <br>
+                            <form action="">
+                                <div class="input-group">
+                                    <label for="curr" class="label">Current Password</label>
+                                    <input type="password" class="input--style-4" name="currentPass" id="curr">
                                 </div>
-
-                            </section>
-                            <section id="security" class="display-hidden">
-                                <h3 class="mine">Change your account password here</h3>
-                                <br>
-                                <form action="">
-                                    <div class="input-group">
-                                        <label for="curr" class="label">Current Password</label>
-                                        <input type="password" class="input--style-4" name="currentPass" id="curr">
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="new" class="label">New Password</label>
-                                        <input type="password" class="input--style-4" name="newPass" id="new">
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="rnew" class="label">Retype New Password</label>
-                                        <input type="password" class="input--style-4" name="rnewPass" id="rnew">
-                                    </div>
-                                    <div class="">
-                                        <button class="btn btn--blue btn-block" type="submit" style="background-color: #17a2b8;
+                                <div class="input-group">
+                                    <label for="new" class="label">New Password</label>
+                                    <input type="password" class="input--style-4" name="newPass" id="new">
+                                </div>
+                                <div class="input-group">
+                                    <label for="rnew" class="label">Retype New Password</label>
+                                    <input type="password" class="input--style-4" name="rnewPass" id="rnew">
+                                </div>
+                                <div class="">
+                                    <button class="btn btn--blue btn-block" type="submit" style="background-color: #17a2b8;
     border-color: #17a2b8;">Submit</button>
-                                    </div>
-                                </form>
+                                </div>
+                            </form>
 
-                            </section>
+                        </section>
 
-                        </div>
                     </div>
-                </section>
+                </div>
             </section>
-        </div>
-        <div class="col-md-3 display-hidden bg-transparent p-3" id="chatScreen">
-            {{> chat }}
-        </div>
+        </section>
 </section>
-<input type="hidden" value="{{currentUser.username}}" id="email">
-<input type="hidden" id="node">
+
 {{> footer}}
 
 
@@ -217,129 +210,11 @@
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
 
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
-<!-- include firebase database -->
-<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
-
 <script>
-    user = document.getElementById('email').value
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = {
-        apiKey: "AIzaSyDIkIVDXtjgqJSCUi9muDuH7TI2xP3SfJ8",
-        authDomain: "agro-a83d3.firebaseapp.com",
-        projectId: "agro-a83d3",
-        storageBucket: "agro-a83d3.appspot.com",
-        messagingSenderId: "233371530556",
-        appId: "1:233371530556:web:716c7013b39116a8e95a39",
-        measurementId: "G-Q8EY10WZ71"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
 
-
-    function formatAMPM(date) {
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        var ampm = hours >= 12 ? 'pm' : 'am';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // the hour '0' should be '12'
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        var strTime = `${date.toDateString()} | ${hours}:${minutes}${ampm}`;
-        return strTime;
-    }
-
-    function scroll() {
-        var objDiv = document.getElementById("screen");
-        objDiv.scrollTop = objDiv.scrollHeight - objDiv.clientHeight;
-    }
-    function closeChatScreen() {
-        $("#settingsScreen").removeClass("col-md-9")
-        $("#settingsScreen").addClass("col-md-12")
-        $("#chatScreen").removeClass("col-md-3")
-        $("#chatScreen").hide()
-
-    }
-
-
-    function submitMessage(e) {
-        if (e.keyCode == 13) {
-            node = document.getElementById("node").value
-            // save in database
-            firebase.database().ref(node).push().set({
-                "sender": user,
-                "message": e.target.value,
-                "time": formatAMPM(new Date)
-            });
-            e.target.value = ''
-
-        }
-    }
-
-    //node1 = 'test'
-    let node1
     function showInput(e, node) {
-        $('#settingsScreen').removeClass("col-md-12")
-        $('#settingsScreen').addClass("col-md-9")
-        $('#chatScreen').show("slow")
-        document.getElementById("node").value = node
-        node1 = node
-
-
-        firebase.database().ref(node).once("value", function (snapshots) {
-            var html = "";
-            // give each message a unique ID
-            snapshots.forEach(function (snapshot) {
-                if (snapshot.val().sender == user) {
-                    html += "<div class='itemMe' id='message-" + snapshot.key + "'>";
-                    html += "<p class='font-small'>" + snapshot.val().message + "</p>"
-                    html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
-                    html += "</div> <br>";
-                }
-
-                else {
-                    html += "<div class='item' id='message-" + snapshot.key + "'>";
-                    html += "<p class='font-small'>" + snapshot.val().message + "</p>"
-                    html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
-                    html += "</div> <br>";
-                }
-
-            })
-
-            document.getElementById("screen").innerHTML = html;
-            scroll()
-
-        });
-
+        location.href = `/livechat/?node=${node}`
     }
-
-    firebase.database().ref(node1 ? node1 : 'text').on("child_added", function (snapshot) {
-        var html = "";
-        // give each message a unique ID
-        if (snapshot.val().sender == user) {
-            html += "<div class='itemMe' id='message-" + snapshot.key + "'>";
-            html += "<p class='font-small'>" + snapshot.val().message + "</p>"
-            html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
-            html += "</div> <br>";
-        }
-
-        else {
-            html += "<div class='item' id='message-" + snapshot.key + "'>";
-            html += "<p class='font-small'>" + snapshot.val().message + "</p>"
-            html += "<span class='text-muted font-smaller'>" + snapshot.val().time + "</span>"
-            html += "</div> <br>";
-        }
-
-        document.getElementById("screen").innerHTML += html;
-        scroll()
-    });
 
     function fileUpload() {
         $("#inputFile").click()
