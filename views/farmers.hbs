@@ -20,10 +20,10 @@
             {{#each profiles}}
             <div class="card bg-light" style="width: 18rem;" onclick="detailss(event, `{{this.user_id}}`)">
                 <i class="fas fa-certificate"></i>
-                <img class="card-img-top" src="/img/fff.jpeg" alt="Card image cap">
+                <img class="card-img-top" src="{{this.profileimage}}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{this.firstname}} {{this.lastname}}</h5>
-                    <p class="card-text font-small">{{this.aboutyou}}</p>
+                    <p class="card-text font-smaller1 word-break">{{this.aboutyou}}</p>
                     <div class="openbtw">
                         <div class="text-center">
                             <i class="fas fa-map-marker-alt font-small"></i> <br>
@@ -45,18 +45,18 @@
         </section>
     </div>
     <div id="sideview" class="bg-dark display-hidden">
-        <section class="p-1 pt-5 mt-5">
+        <section class="p-1 pt-5 ">
             <article id="detailsOfFarmer">
-                <div style="position: absolute;right: 20px;top: 70px;color: #ffffffab;z-index: 2;">
+                <div style="position: absolute;right: 20px;top: 30px;color: #ffffffab;z-index: 2;">
                     <i class="far fa-times-circle cursor" onclick="closeSidebar()"
                         style="font-size: 20px!important;"></i>
                 </div>
                 <div>
-                    <img src="/img/fff.jpeg" alt="" id="pimage" style="width: 100%; border-radius: 20px">
+                    <img src="" alt="" id="pimage" style="width: 100%; border-radius: 20px">
                 </div><br>
                 <div>
                     <h3 id="name" class="mine color-white"></h3>
-                    <p class="font-smaller" id="about"></p>
+                    <p class="font-smaller word-break" id="about"></p>
                 </div>
 
                 <div class="openbtw">
@@ -143,12 +143,13 @@
             url: `/profile/${id}/retrieve`,
             method: 'GET',
             success: function (data) {
-                const { email, aboutyou, firstname, lastname, state, birthday, yrexperience, landnumber, phoneNumber, majorproduce, user_id } = data.data.userProfile
+                const { profileimage, email, aboutyou, firstname, lastname, state, birthday, yrexperience, landnumber, phoneNumber, majorproduce, user_id } = data.data.userProfile
 
                 document.getElementById("name").textContent = `${firstname} ${lastname}`
                 document.getElementById("name2").textContent = `${firstname} ${lastname}`
                 document.getElementById("about").textContent = aboutyou
                 document.getElementById("location").textContent = state
+                document.getElementById("pimage").src = profileimage
                 document.getElementById("birthday").textContent = birthday
                 document.getElementById("phone").textContent = phoneNumber
                 document.getElementById("land").textContent = landnumber

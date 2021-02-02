@@ -9,7 +9,7 @@ const userProfileSchema = new mongoose.Schema({
     email: String,
     role:String,
     birthday:{
-        type: Date
+        type: Number
     },
     state:{
         type: String,
@@ -20,6 +20,7 @@ const userProfileSchema = new mongoose.Schema({
         type: String,
         trim:true
     },
+    profession: String,
     languages:{
         type:String
     },

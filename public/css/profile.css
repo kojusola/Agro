@@ -352,6 +352,9 @@ input {
     width: 100%;
 }
 
+.word-break{
+    word-break: break-all;
+}
 
 
 .user-card{
@@ -360,7 +363,9 @@ input {
 .user-posts{
     height: auto;
 }
-
+.font-smaller1{
+    font-size: 11px!important;
+}
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */

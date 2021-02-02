@@ -35,7 +35,7 @@
                             <div class="col-md-9">
                                 <div class="row">
                                     <div class="col-md-3 centered">
-                                        <img src="/img/fff.jpeg" alt="d-128x128" id="profile-picture" class="support">
+                                        <img src="{{profile.profileimage}}" alt="d-128x128" id="profile-picture" class="support">
                                     </div>
                                     <div class="col-md-6 centered-left">
                                         <div class="details">
@@ -46,8 +46,8 @@
                                 </div>
                             </div>
                             <div class="col-md-3 centered">
-                                <form action="/" id="pixForm" method="POST" class="display-hidden">
-                                    <input type="file" name="profilePix" id="inputFile" onchange="fileSelect()">
+                                <form action="/profile/{{profile.user_id}}/pimage" id="pixForm" enctype="multipart/form-data" method="POST" class="display-hidden">
+                                    <input type="file" name="profileImage" id="inputFile" onchange="fileSelect()">
                                 </form>
                                 <button type="button" class="btn btn-info justify-content-end update-button"
                                     onclick="fileUpload()">Update</button>
@@ -86,15 +86,15 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="input-group">
-                                            <label class="label">Birthday</label>
-                                            <input class="input--style-4" type="date" value="{{profile.birthday}}"
+                                            <label class="label">Age</label>
+                                            <input class="input--style-4" type="number" value="{{profile.birthday}}"
                                                 id="birthday" name="birthday">
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="input-group">
                                             <label class="label">Phone Number</label>
-                                            <input class="input--style-4" type="text" value="{{profile.phoneNumber}}"
+                                            <input class="input--style-4" type="tel" value="{{profile.phoneNumber}}"
                                                 name="phoneNumber">
                                         </div>
                                     </div>

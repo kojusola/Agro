@@ -11,6 +11,7 @@ const mongoose = require("mongoose")
 const session = require("express-session")
 const cookieParser = require("cookie-parser")
 const methodOverride = require("method-override")
+const fileUpload = require("express-fileupload")
 const MongoStore = require("connect-mongo")(session);
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
@@ -26,6 +27,10 @@ app.use(express.static(path.join(__dirname, 'public/')))
 
 
 
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}))
 app.use(cookieParser());
 app.use(
 	session({
@@ -60,12 +65,14 @@ const farmerRouter = require("./routes/farmerRouter")
 const landRouter = require("./routes/landingPageRouter")
 const authRouter = require("./routes/authRouter")
 const livechatRouter = require("./routes/liveChatRouter")
+const adminRouter = require("./routes/adminRouter")
 
 app.use('/',landRouter)
 app.use('/auth', authRouter)
 app.use('/profile', profileRouter)
 app.use('/farmers', farmerRouter)
 app.use('/livechat', livechatRouter)
+app.use('/admin', adminRouter)
 
 
 //database connection

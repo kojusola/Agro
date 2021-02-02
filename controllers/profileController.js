@@ -71,48 +71,34 @@ exports.createMessage = async(req, res, next) => {
 
 
 // =================================================================================
-exports.getAllProfile= async(req, res) =>{
-    const allUsersProfile = await Profile.find();
-    if(!allUsersProfile){
-        req.flash('error', 'Something went wrong. Try again')
-        return res.redirect('back')
-    }
-    res.status(200).json({
-        status: "success",
-        data:{
-            allUsersProfile
-        }
-    })
-}
 
-exports.getAllFarmerProfile= async(req, res) =>{
-    const usersProfile = await Profile.find({role:'farmer',status: 'verified'});
-    if(!usersProfile){
-        req.flash('error', 'Something went wrong. Try again')
-        return res.redirect('back')
-    }
-    res.status(200).json({
-        status: "success",
-        data:{
-            usersProfile
-        }
-    })
-}
+
+// exports.getAllFarmerProfile= async(req, res) =>{
+//     const usersProfile = await Profile.find({role:'farmer',status: 'verified'});
+//     if(!usersProfile){
+//         req.flash('error', 'Something went wrong. Try again')
+//         return res.redirect('back')
+//     }
+//     res.status(200).json({
+//         status: "success",
+//         data:{
+//             usersProfile
+//         }
+//     })
+// }
 // ==================================================================================================
 // // create profile
 
-exports.createProfile =  async(req, res)=>{
-    // const result = await cloudinary.uploader.upload(req.body.profileimage.file.path);
+exports.createProfile = async (req, res, next) => {
+    const result = await cloudinary.uploader.upload(req.files.profileImage.tempFilePath);
     const prof = await Profile.create({
         user_id: req.user._id,
         email: req.user.username,
         role: req.user.role,
-        profileimage: null
-        // {avatar:result.secure_url,cloundinary_id: result.public_id}
-        ,
+        profileimage: result.url,
         birthday: req.body.birthday,
         state: req.body.state,
-        phoneNumber: req.body.phonenumber,
+        phoneNumber: req.body.phoneNumber,
         firstname:req.body.firstname,
         lastname:req.body.lastname,
         languages:req.body.languages,
@@ -144,27 +130,27 @@ exports.updateProfile =  async(req, res)=>{
 };
 
 exports.updateProfileImage = async (req, res) => {
-    const result = await cloudinary.uploader.upload(req.file.path); 
-        const updateProfile = await Profile.findByIdAndUpdate({user_id: req.params.id}, {profileimage: {avatar:result.secure_url,cloundinary_id: result.public_id}}, {new: true})
+    const result = await cloudinary.uploader.upload(req.files.profileImage.tempFilePath); 
+    const updateProfile = await Profile.findOneAndUpdate({user_id: req.params.id}, {profileimage: result.url}, {new: true})
         if(!updateProfile){
             req.flash('error', 'Something went wrong. Try again')
             return res.redirect('back')
         }
         req.flash('success', 'Profile image updated successfully')
-        res.redirect(`/profile/${user_id}`);
+        res.redirect(`/profile/${updateProfile.user_id}`);
 }
 
 // posting images of the farm
-exports.updateFarmImage = async (req, res) => {
-    const files = req.files
-    for(const file of files){
-        const result = await cloudinary.uploader.upload(req.file.path);
-        const updateProfile = await Profile.findByIdAndUpdate({user_id: req.params.id}, {$push: {farmimage: {avatar:result.secure_url,cloundinary_id: result.public_id}}}, {new: true})
-        if(!updateProfile){
-            req.flash('error', 'Something went wrong. Try again')
-            return res.redirect('back')
-        }
-        req.flash('success', 'Profile image updated successfully')
-        res.redirect(`/profile/${user_id}`);
-    }
-}
+// exports.updateFarmImage = async (req, res) => {
+//     const files = req.files
+//     for(const file of files){
+//         const result = await cloudinary.uploader.upload(req.file.path);
+//         const updateProfile = await Profile.findByIdAndUpdate({user_id: req.params.id}, {$push: {farmimage: {avatar:result.secure_url,cloundinary_id: result.public_id}}}, {new: true})
+//         if(!updateProfile){
+//             req.flash('error', 'Something went wrong. Try again')
+//             return res.redirect('back')
+//         }
+//         req.flash('success', 'Profile image updated successfully')
+//         res.redirect(`/profile/${user_id}`);
+//     }
+// }

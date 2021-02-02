@@ -2,57 +2,74 @@
     <div class="col-md-6" id="profileimage"></div>
     <div class="col-md-6" id="profileform">
         <div class="profileform">
-            <form action="/profile/{{profile.user_id}}?_method=PATCH" method="POST">
-                <h2>Complete your profile</h2>
+            <form action="/profile/" method="POST" enctype="multipart/form-data">
+                <h2>Complete your profile</h2> <br>
+                <a onclick="addPix(event)" class="text-left cursor" ><i class="fas fa-plus-square " ></i><span id="tag">Add profile pix</span> </a><br><br>
+                <input type="file" name="profileImage" onchange="changeImage(event)" id="avi" accept=".png, .jpeg, .jpg" required>
+
                 <div class="form-row">
                     <div class="col">
                         <div class="input-group">
                             <label class="label">first name</label>
-                            <input class="input--style-4" type="text" value="{{profile.firstname}}" name="firstname">
+                            <input class="input--style-4" type="text" name="firstname" required>
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group">
                             <label class="label">last name</label>
-                            <input class="input--style-4" type="text" value="{{profile.lastname}}" name="lastname">
+                            <input class="input--style-4" type="text" name="lastname" required>
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group">
                             <label class="label">State</label>
-                            <input class="input--style-4" type="text" value="{{profile.state}}" name="state">
+                            <input class="input--style-4" type="text" name="state" required>
                         </div>
                     </div>
                 </div>
                 <div class=" form-row">
                     <div class="col">
                         <div class="input-group">
-                            <label class="label">Birthday</label>
-                            <input class="input--style-4" type="date" value="{{profile.birthday}}" id="birthday"
-                                name="birthday">
+                            <label class="label">Age</label>
+                            <input class="input--style-4" type="number" id="birthday" name="birthday" required>
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group">
                             <label class="label">Phone Number</label>
-                            <input class="input--style-4" type="text" value="{{profile.phoneNumber}}"
-                                name="phoneNumber">
+                            <input class="input--style-4" type="tel" name="phoneNumber" required>
                         </div>
                     </div>
                 </div>
+                {{#if (equal currentUser 'investor')}}
+                <div class="form-row ">
+                    <div class="col">
+                        <div class="input-group">
+                            <label class="label">Profession</label>
+                            <input class="input--style-4" type="text" name="profession" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <label class="label">Number of Lands Owned</label>
+                            <input class="input--style-4" type="number" min="0" name="landnumber" required>
+                        </div>
+                    </div>
+
+                </div>
+                {{else}}
 
                 <div class="form-row ">
                     <div class="col">
                         <div class="input-group">
                             <label class="label">Years of Experience</label>
-                            <input class="input--style-4" type="number" value="{{profile.yrexperience}}"
-                                name="yrexperience">
+                            <input class="input--style-4" type="number" min="0" name="yrexperience" required>
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group">
                             <label class="label">Languages</label>
-                            <input class="input--style-4" type="text" value="{{profile.languages}}" name="languages">
+                            <input class="input--style-4" type="text" name="languages"  required>
                         </div>
                     </div>
 
@@ -61,22 +78,21 @@
                     <div class="col">
                         <div class="input-group">
                             <label class="label">Number of Lands Owned</label>
-                            <input class="input--style-4" type="number" min="0" value="{{profile.landnumber}}"
-                                name="landnumber">
+                            <input class="input--style-4" type="number" min="0" name="landnumber" required>
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group">
                             <label class="label">Major Produce</label>
-                            <input class="input--style-4" type="text" value="{{profile.majorproduce}}"
-                                name="majorproduce">
+                            <input class="input--style-4" type="text" name="majorproduce" required>
                         </div>
                     </div>
                 </div>
+                {{/if}}
                 <div class="form-row">
                     <div class="input-group" style="margin: 0 15px">
                         <label class="label">About You</label>
-                        <textarea class="input--style-4 w-100" rows="3" name="aboutyou">{{profile.aboutyou}}</textarea>
+                        <textarea class="input--style-4 w-100" rows="3" name="aboutyou" required></textarea>
                     </div>
                 </div>
                 <br>
@@ -89,3 +105,18 @@
     </div>
 
 </div>
+<style>
+    #avi{
+        display: none;
+    }
+</style>
+<script>
+    function addPix(e){
+        document.getElementById('avi').click()
+    }
+    function changeImage(e){
+        let path = e.target.value.split('\\')
+        let name = path[path.length - 1]
+        document.getElementById('tag').textContent = name
+    }
+</script>
