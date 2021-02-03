@@ -176,7 +176,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.user._id)
     user.changePassword(currentPass, newPass, (err) => {
         if (err) {
-            req.flash("error", "Something went wrong.Please try again.")
+            req.flash("error", "There is an issue with the provided passwords")
             return res.redirect("back")
         }
         req.flash('success', "Password changed successfully")

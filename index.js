@@ -13,6 +13,8 @@ const cookieParser = require("cookie-parser")
 const methodOverride = require("method-override")
 const fileUpload = require("express-fileupload")
 const MongoStore = require("connect-mongo")(session);
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.EMAIL_KEY);
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
 
@@ -56,6 +58,28 @@ app.use(function(req, res, next){
 	res.locals.success = req.flash("success");
 	next();
 });
+
+
+app.post("/email", async (req, res) => {
+    const msg = {
+		to: 'charlesugbana04@gmail.com',
+    	from: 'developmenthub123@gmail.com',
+    	subject: 'Someone reached out - AgroTech',
+		html: `<h4>Hello admin,</h4>
+		<p>You have a new message for an AgroTech user, <strong>${req.body.first-name} ${req.body.last-name}</strong></p> 
+		<p> Phone: ${req.body.phone}</p>
+		<p> Phone: ${req.body.email}</p>
+		<p> Message: ${req.body.message}</p>
+		`
+	};
+		sgMail.send(msg).then(() => {
+			req.flash("success", "Message sent successfully!")
+			res.redirect("/")
+		}).catch(error => {
+			req.flash("error", "Something went wrong. Please try again!")
+			res.redirect("/")
+		})
+	})
 
 
 //import routes
