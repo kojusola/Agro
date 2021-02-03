@@ -36,24 +36,7 @@ const userProfileSchema = new mongoose.Schema({
     aboutyou:{
         type:String
     },
-    profileimage:{
-        type: Object,
-        "avatar":{
-            type:String
-        },
-        "cloundinary_id":{
-            type:String
-        }
-    },
-    farmimage:[{
-        type: Object,
-        "avatar":{
-            type:String
-        },
-        "cloundinary_id":{
-            type:String
-        }
-    }],
+    profileimage: String,
     verified:{
         type: Boolean,
         default: false

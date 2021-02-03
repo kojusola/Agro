@@ -1,14 +1,26 @@
+const User = require("../models/user");
 const Profile = require("./../models/profile")
 
-exports.admin = async (req, res, next) => {
-    res.render('dashboard.hbs')
-}
+
 
 exports.getAllProfile= async(req, res) =>{
     const profiles = await Profile.find();
-    if(!profiles){
-        req.flash('error', 'Something went wrong. Try again')
-        return res.redirect('back')
-    }
     res.render('dashboard', {profiles})
+}
+
+
+exports.verifyProfile = async (req, res, next) => {
+    await Profile.findByIdAndUpdate(req.params.id, { verified: true }, { new: true })
+    req.flash("success", "Profile successfully updated")
+    res.redirect("/admin")
+}
+
+
+exports.deleteProfile = async (req, res, next) => {
+    const profile = await Profile.findById(req.params.id)
+    await User.findByIdAndDelete(profile.user_id)
+    await Profile.findByIdAndDelete(req.params.id)
+    res.status(200).json({
+        "status":"success"
+    })
 }

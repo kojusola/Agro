@@ -4,6 +4,7 @@ const upload = require("../utils/multer");
 const cloudinary = require("../utils/cloudinary");
 const generator = require('generate-password');
 const dateFormat = require("dateformat");
+const sizeOf = require('image-size');
 
 exports.profileForm = async (req, res) => {
     const prof = Profile.findOne({ user_id: req.user._id })
@@ -95,31 +96,40 @@ exports.createMessage = async(req, res, next) => {
 // // create profile
 
 exports.createProfile = async (req, res, next) => {
-    const result = await cloudinary.uploader.upload(req.files.profileImage.tempFilePath);
-    const prof = await Profile.create({
-        user_id: req.user._id,
-        email: req.user.username,
-        role: req.user.role,
-        profileimage: result.url,
-        birthday: req.body.birthday,
-        state: req.body.state,
-        phoneNumber: req.body.phoneNumber,
-        firstname:req.body.firstname,
-        lastname:req.body.lastname,
-        languages:req.body.languages,
-        landnumber:req.body.landnumber,
-        majorproduce:req.body.majorproduce,
-        yrexperience:req.body.yrexperience,
-        aboutyou:req.body.aboutyou
-    })
-    if(req.user.role == 'investor'){
-        req.flash('success', 'Profile updated successfully')
-        res.redirect(`/`);
+    sizeOf(req.files.profileImage.tempFilePath, async function (err, dimensions) {
+        if (dimensions.width != dimensions.height && Math.abs(dimensions.height - dimensions.width) > 50) {
+            req.flash('error', 'Please upload an image of almost equal dimension')
+            return res.redirect('back')
+        } else {
+            const result = await cloudinary.uploader.upload(req.files.profileImage.tempFilePath);
+            const prof = await Profile.create({
+                user_id: req.user._id,
+                email: req.user.username,
+                role: req.user.role,
+                profileimage: result.url,
+                birthday: req.body.birthday,
+                state: req.body.state,
+                phoneNumber: req.body.phoneNumber,
+                firstname: req.body.firstname,
+                profession:req.body.profession,
+                lastname:req.body.lastname,
+                languages:req.body.languages,
+                landnumber:req.body.landnumber,
+                majorproduce:req.body.majorproduce,
+                yrexperience:req.body.yrexperience,
+                aboutyou:req.body.aboutyou
+            })
+        if(req.user.role == 'investor'){
+            req.flash('success', 'Profile updated successfully')
+            res.redirect(`/`);
 
-    }else{
-        req.flash('success', 'Profile updated successfully')
-        res.redirect(`/profile/${prof.user_id}`);
-    }
+        }else{
+            req.flash('success', 'Profile updated successfully')
+            res.redirect(`/profile/${prof.user_id}`);
+        }
+    
+        }
+    });
     
 };
 
@@ -135,16 +145,24 @@ exports.updateProfile =  async(req, res)=>{
 };
 
 exports.updateProfileImage = async (req, res) => {
-    const result = await cloudinary.uploader.upload(req.files.profileImage.tempFilePath); 
-    const updateProfile = await Profile.findOneAndUpdate({user_id: req.params.id}, {profileimage: result.url}, {new: true})
-        if(!updateProfile){
-            req.flash('error', 'Something went wrong. Try again')
+    sizeOf(req.files.profileImage.tempFilePath, async function (err, dimensions) {
+        if (dimensions.width != dimensions.height && Math.abs(dimensions.height - dimensions.width) > 50) {
+            req.flash('error', 'Please upload an image of almost equal dimension')
             return res.redirect('back')
+        } else {
+            const result = await cloudinary.uploader.upload(req.files.profileImage.tempFilePath);
+            const updateProfile = await Profile.findOneAndUpdate({ user_id: req.params.id }, { profileimage: result.url }, { new: true })
+            if (!updateProfile) {
+                req.flash('error', 'Something went wrong. Try again')
+                return res.redirect('back')
+            }
+            req.flash('success', 'Profile image updated successfully')
+            res.redirect(`/profile/${updateProfile.user_id}`);
         }
-        req.flash('success', 'Profile image updated successfully')
-        res.redirect(`/profile/${updateProfile.user_id}`);
+        
+    });
+    
 }
-
 // posting images of the farm
 // exports.updateFarmImage = async (req, res) => {
 //     const files = req.files
@@ -158,4 +176,3 @@ exports.updateProfileImage = async (req, res) => {
 //         req.flash('success', 'Profile image updated successfully')
 //         res.redirect(`/profile/${user_id}`);
 //     }
-// }

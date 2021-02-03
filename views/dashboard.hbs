@@ -1,24 +1,31 @@
 {{> nav }}
-<main class="container">
+<main class="container mt-4">
     <div class="openbtw">
         <div class="flex-start" id="filter-cont">
-            <input type="text" name="filter" placeholder="Filter by category" class="filter" onkeyup="taskFilter()">
+            <input type="text" name="filter" placeholder="Filter by role | location | status" class="filter" onkeyup="taskFilter()">
         </div>
     </div>
     <br>
     <table id="data" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
         <thead id="thead">
             <tr>
-                <th class="th-sm">Name
+                <th class="th-sm">Full Name
 
                 </th>
-                <th class="th-sm">Product Category
+                <th class="th-sm">Contact Info
 
                 </th>
-                <th class="th-sm">Price (&#8358;)
+                
+                <th class="th-sm">Role
 
                 </th>
-                <th class="th-sm">Discount (&#8358;)
+                <th class="th-sm">Verified
+
+                </th>
+                <th class="th-sm">Land Number
+
+                </th>
+                <th class="th-sm">Location</th>
 
                 </th>
                 <th class="th-sm">Actions
@@ -28,19 +35,19 @@
         </thead>
         <tbody id="tbody">
 
-            {{#each products}}
-            <tr class="product-row">
-                <td class="productName"><a href="/shop/{{this._id}}">{{this.name}}</a>
-                    <img src="/uploads/{{this.image}}" class="preview" style="position: absolute;" alt="">
-                    <i class="fas fa-images" onmouseover="hover(event)" onclick="fileUpload(event, `{{this._id}}`)"
-                        onmouseout="hover2(event)"></i>
+            {{#each profiles}}
+            <tr class="profile-row">
+                <td class="">{{this.firstname}} {{this.lastname}}
                 </td>
-                <td>{{this.category}}</td>
-                <td>{{this.price}}</td>
-                <td>{{this.discount}}</td>
+                <td class="">{{this.email}} <br>{{this.phoneNumber}}
+                </td>
+                <td>{{this.role}}</td>
+                <td class="cursor" ondblclick="return updateUser(event, `{{this._id}}`)">{{this.verified}}</td>
+                <td>{{this.landnumber}}</td>
+                <td>{{this.state}}</td>
                 <td>
-                    <i class="far fa-edit" onclick="editProduct(event, `{{this._id}}`)"></i>
-                    <i class="fas fa-trash-alt" id="bin" ondblclick="deleteProduct(event, `{{this._id}}`)"></i>
+                    {{!-- <i class="far fa-edit" onclick="editProduct(event, `{{this._id}}`)"></i> --}}
+                    <i class="fas fa-trash-alt cursor" id="bin" ondblclick="deleteProfile(event, `{{this._id}}`)"></i>
                 </td>
             </tr>
             {{/each}}
@@ -48,23 +55,33 @@
         </tbody>
     </table>
 </main>
-<form id="standby" method="POST"></form>
-<form method="POST" enctype="multipart/form-data" id="standbyTwo">
-    <input type="file" name="image" id="standbyInput" onchange="fileSelected(event)">
-</form>
+
 
 {{> footer }}
 <style>
+    main{
+        min-height: 90vh;
+    }
     footer {
         bottom: 0;
     }
 
     .filter {
         width: 70%;
+        border: 0.4px solid grey;
+        outline: none;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .filter:focus {
+        border: 0.4px solid red;
     }
 
     #filter-cont {
         width: 40%;
+    }
+    *{
+        font-size: small!important;
     }
 </style>
 
@@ -75,73 +92,20 @@
 
     function taskFilter() {
         const filter = document.getElementsByClassName("filter")[0].value.toLowerCase();
-        const products = document.querySelectorAll(".product-row");
-        products.forEach(function (product) {
-            let cat = product.children[1].textContent.toLowerCase();
-            if (cat.indexOf(filter) != -1) {
-                product.style.display = "table-row";
+        const profiles = document.querySelectorAll(".profile-row");
+        profiles.forEach(function (profile) {
+            let role = profile.children[2].textContent.toLowerCase();
+            let ver = profile.children[3].textContent.toLowerCase();
+            let location = profile.children[4].textContent.toLowerCase();
+            if (role.indexOf(filter) != -1 || ver.indexOf(filter) != -1 || location.indexOf(filter) != -1) {
+                profile.style.display = "table-row";
             } else {
-                product.style.display = "none";
+                profile.style.display = "none";
             }
 
         })
 
     }
-
-    function hover(e) {
-        e.target.parentElement.children[1].style.visibility = 'visible'
-    }
-    function hover2(e) {
-        e.target.parentElement.children[1].style.visibility = 'hidden'
-    }
-
-    let el = document.getElementById('popup')
-    let el1 = document.getElementById("addProduct")
-    let el2 = document.getElementById("editProduct")
-    let el3 = document.getElementById("addCoupon")
-    document.getElementById("okpop").addEventListener('click', function () {
-        el.style.display = 'flex';
-        el1.style.display = "block";
-        el2.style.display = "none";
-        el3.style.display = "none";
-    })
-
-    document.getElementById("couponForm").addEventListener('click', function () {
-        el.style.display = 'flex';
-        el1.style.display = "none";
-        el2.style.display = "none";
-        el3.style.display = "block";
-    })
-
-    function addCategory() {
-        var input = $('#categoryy').val()
-        if (input.length == 0) {
-            return;
-        }
-        var form = document.getElementById("standby")
-        var input1 = document.createElement('input')
-        input1.name = "category"
-        input1.value = input
-        input1.type = "hidden"
-        form.appendChild(input1)
-        form.action = "/admin/products/category"
-        form.submit()
-
-
-    }
-
-    function fileUpload(e, id) {
-        let input1 = document.getElementById("standbyInput")
-        let form = document.getElementById("standbyTwo")
-        form.setAttribute('action', `/admin/products/${id}/image`)
-        input1.click()
-    }
-
-    function fileSelected(e) {
-        document.getElementById("standbyTwo").submit()
-    }
-
-
 
 
 
@@ -173,52 +137,28 @@
 
 
 
-    function editProduct(e, id) {
-        el.style.display = 'flex';
-        el1.style.display = "none";
-        el2.style.display = "block";
-        el3.style.display = "none";
-        document.getElementById('editProduct').setAttribute('action', `/admin/products/${id}?_method=PATCH`)
+    function updateUser(e, id) {
         $.ajax({
-            url: `/admin/products/${id}`,
-            data: { id: id },
-            dataType: 'json',
+            url: `/admin/profile/${id}`,
             type: 'GET',
-            enctype: 'multipart/form-data',
             error: function () {
                 console.log("Something went wrong")
             },
             success: function (data) {
-                document.getElementById("Editdiscount").value = data.data.product[0].discount
-                document.getElementById("Editname").value = data.data.product[0].name
-                document.getElementById("Editdesc").value = data.data.product[0].description
-                document.getElementById("Editcat").value = data.data.product[0].category
-                document.getElementById("Editprice").value = data.data.product[0].price
-
-
+                location.reload()
             },
 
         });
 
     }
 
-    el.addEventListener('click', function (event) {
-        if (event.currentTarget !== event.target) {
-            return;
-        }
-        el.style.display = 'none';
-    }, false);
 
 
-
-    function deleteProduct(e, id) {
+    function deleteProfile(e, id) {
         e.target.parentElement.parentElement.remove();
         $.ajax({
-            url: `/admin/products/${id}`,
-            data: { id },
-            dataType: 'json',
+            url: `/admin/profile/${id}`,
             type: 'DELETE',
-            enctype: 'multipart/form-data',
             error: function () {
                 console.log("Something went wrong")
             },

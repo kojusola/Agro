@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-md-3 centered">
                                 <form action="/profile/{{profile.user_id}}/pimage" id="pixForm" enctype="multipart/form-data" method="POST" class="display-hidden">
-                                    <input type="file" name="profileImage" id="inputFile" onchange="fileSelect()">
+                                    <input type="file" name="profileImage" id="inputFile" onchange="fileSelect()" accept=".png, .jpg, .jpeg">
                                 </form>
                                 <button type="button" class="btn btn-info justify-content-end update-button"
                                     onclick="fileUpload()">Update</button>
@@ -99,8 +99,25 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                {{#if (equal profile.role 'investor')}}
                                 <div class="form-row">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label class="label">Profession</label>
+                                            <input class="input--style-4" type="text" value="{{profile.profession}}"
+                                                name="profession">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label class="label">Number of Lands Owned</label>
+                                            <input class="input--style-4" type="number" min="0"
+                                                value="{{profile.landnumber}}" name="landnumber">
+                                        </div>
+                                    </div>
+                                </div>
+                                {{else}}
+                                 <div class="form-row">
                                     <div class="col">
                                         <div class="input-group">
                                             <label class="label">Years of Experience</label>
@@ -133,8 +150,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{/if}}
                                 <div class="form-row">
-                                    <div class="input-group" style="margin: 0 15px">
+                                    <div class="input-group" style="margin: 0 4px">
                                         <label class="label">About You</label>
                                         <textarea class="input--style-4 w-100" rows="3"
                                             name="aboutyou">{{profile.aboutyou}}</textarea>

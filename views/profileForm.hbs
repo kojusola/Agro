@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                {{#if (equal currentUser 'investor')}}
+                {{#if (equal currentUser.role 'investor')}}
                 <div class="form-row ">
                     <div class="col">
                         <div class="input-group">
@@ -90,7 +90,7 @@
                 </div>
                 {{/if}}
                 <div class="form-row">
-                    <div class="input-group" style="margin: 0 15px">
+                    <div class="input-group" style="margin: 0 4px">
                         <label class="label">About You</label>
                         <textarea class="input--style-4 w-100" rows="3" name="aboutyou" required></textarea>
                     </div>

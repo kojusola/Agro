@@ -9,7 +9,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-filter"></i></span>
                         </div>
-                        <input type="text" class="form-control bg-transparent" placeholder="Filter by name | location"
+                        <input type="text" class="form-control bg-transparent" onkeyup="filter(event)" placeholder="Filter by name | location | age"
                             aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 </div>
@@ -18,7 +18,7 @@
         </section>
         <section class="container grid-display">
             {{#each profiles}}
-            <div class="card bg-light" style="width: 18rem;" onclick="detailss(event, `{{this.user_id}}`)">
+            <div class="card bg-light profiless" style="width: 18rem;" onclick="detailss(event, `{{this.user_id}}`)">
                 <i class="fas fa-certificate"></i>
                 <img class="card-img-top" src="{{this.profileimage}}" alt="Card image cap">
                 <div class="card-body">
@@ -100,6 +100,23 @@
 {{> footer}}
 
 <script>
+     function filter(e) {
+        const filter = e.target.value.toLowerCase()
+        const profiles = document.querySelectorAll(".profiless");
+        profiles.forEach(function (profile) {
+            let name = profile.lastElementChild.firstElementChild.textContent.toLowerCase();
+            let age = profile.lastElementChild.lastElementChild.children[1].lastElementChild.textContent.toLowerCase();
+            let location = profile.children[2].lastElementChild.firstElementChild.lastElementChild.textContent.toLowerCase();
+            if (name.indexOf(filter) != -1 || location.indexOf(filter) != -1 || age.indexOf(filter) != -1) {
+                profile.style.display = "block";
+            } else {
+                profile.style.display = "none";
+            }
+
+        })
+
+    }
+
     function sendMessageToFarmer() {
         const id = document.getElementById('identity').value
         const email = document.getElementById('emaill').value
@@ -185,7 +202,8 @@
         font-size: small !important;
     }
 
-    #sideview {
+ 
+   #sideview {
         height: 100vh;
         position: fixed;
         right: 0;
