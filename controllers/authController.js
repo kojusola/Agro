@@ -2,27 +2,28 @@ const user = require("../models/user");
 const Profile = require("../models/profile");
 const passport = require("passport");
 const mongoose = require('mongoose')
+const catchAsync = require("./../utils/catchAsync")
 
 
 
-exports.userLoginForm = (req, res) => {
+exports.userLoginForm =catchAsync(async (req, res, next) => {
     if (req.user) {
         req.flash("error", "Already signed in!");
         return res.redirect("back")
     }
     res.render('signin.hbs')
-}
+})
 
-exports.userSignupForm = (req, res) => {
+exports.userSignupForm = catchAsync(async (req, res, next) => {
     if (req.user) {
         req.flash("error", "Currently signed in. Please log out!");
         return res.redirect("back")
     }
     res.render('signup.hbs')
-}
+})
 
 
-exports.signup = async (req, res, next) => {
+exports.signup = catchAsync(async (req, res, next) => {
     if (req.user) {
         req.flash("error", "Already signed in!");
         return res.redirect("back")
@@ -56,10 +57,10 @@ exports.signup = async (req, res, next) => {
               })(req, res, next);
             }
         
-}
+})
 
 
-exports.login = async (req, res, next) => {
+exports.login = catchAsync(async (req, res, next) => {
     if (req.user) {
         req.flash("error", "Already signed in!");
         return res.redirect("back")
@@ -105,10 +106,10 @@ exports.login = async (req, res, next) => {
    
 }
 
+)
 
-
-exports.logout = async (req, res, next) => {
+exports.logout = catchAsync(async (req, res, next) => {
     req.logout()
     req.flash("success", "Logged out successfully");
     res.redirect("/")
-}
+})

@@ -191,18 +191,18 @@
                         <section id="security" class="display-hidden">
                             <h3 class="mine">Change your account password here</h3>
                             <br>
-                            <form action="">
+                            <form action="/profile/password-reset" method="POST">
                                 <div class="input-group">
                                     <label for="curr" class="label">Current Password</label>
-                                    <input type="password" class="input--style-4" name="currentPass" id="curr">
+                                    <input type="password" class="input--style-4" name="currentPass" id="curr" required>
                                 </div>
                                 <div class="input-group">
                                     <label for="new" class="label">New Password</label>
-                                    <input type="password" class="input--style-4" name="newPass" id="new">
+                                    <input type="password" class="input--style-4" name="newPass" id="new" required>
                                 </div>
                                 <div class="input-group">
                                     <label for="rnew" class="label">Retype New Password</label>
-                                    <input type="password" class="input--style-4" name="rnewPass" id="rnew">
+                                    <input type="password" class="input--style-4" onkeyup="passCheck(event)" name="rnewPass" id="rnew" required>
                                 </div>
                                 <div class="">
                                     <button class="btn btn--blue btn-block" type="submit" style="background-color: #17a2b8;
@@ -229,6 +229,19 @@
     crossorigin="anonymous"></script>
 
 <script>
+document.getElementById('rnew').addEventListener('focus', function(){
+  document.getElementById('new').style.border = '1px solid #ff6801'
+  document.getElementById('rnew').style.border = '1px solid #05F'
+})
+
+function passCheck(e){
+  passwd1 = document.getElementById('new').value
+  if(e.target.value == passwd1){
+    document.getElementById('rnew').style.border = '1px solid #ff6801'
+  }else{
+    document.getElementById('rnew').style.border = '1px solid #05F'
+  }
+}
 
     function showInput(e, node) {
         location.href = `/livechat/?node=${node}`

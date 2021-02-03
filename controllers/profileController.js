@@ -5,17 +5,18 @@ const cloudinary = require("../utils/cloudinary");
 const generator = require('generate-password');
 const dateFormat = require("dateformat");
 const sizeOf = require('image-size');
+const catchAsync = require("./../utils/catchAsync")
 
-exports.profileForm = async (req, res) => {
+exports.profileForm = catchAsync(async (req, res, next) => {
     const prof = Profile.findOne({ user_id: req.user._id })
     if (prof.length == 0) {
         req.flash('error', 'You have a profile already. Update your profile from account settings.')
         return res.redirect('back');
     }
     res.render('profileForm.hbs')
-}
+})
 
-exports.getOneProfile= async(req, res) =>{
+exports.getOneProfile= catchAsync( async(req, res) =>{
     const userProfile = await Profile.findOne({user_id: req.params.id});
     if(userProfile.length == 0){
         req.flash('error', 'Something went wrong. Try again')
@@ -23,8 +24,8 @@ exports.getOneProfile= async(req, res) =>{
     }
     return res.render('userSetting.hbs', {profile: userProfile})
 }
-
-exports.retriveOneProfile= async(req, res) =>{
+)
+exports.retriveOneProfile= catchAsync(async(req, res) =>{
     const userProfile = await Profile.findOne({user_id: req.params.id});
     if(userProfile.length == 0){
         req.flash('error', 'Something went wrong. Try again')
@@ -36,14 +37,14 @@ exports.retriveOneProfile= async(req, res) =>{
             userProfile
         }
     })
-}
+})
 
 
 
 
 
 
-exports.createMessage = async(req, res, next) => {
+exports.createMessage = catchAsync(async(req, res, next) => {
     const mapper = [{"identity": req.params.id}, {"identity": req.user._id}]
     const randomNumber = generator.generate({
         length: 15,
@@ -71,7 +72,7 @@ exports.createMessage = async(req, res, next) => {
     .catch(err=>{
         console.log(err)
     })
-}
+})
 
 
 
@@ -95,7 +96,7 @@ exports.createMessage = async(req, res, next) => {
 // ==================================================================================================
 // // create profile
 
-exports.createProfile = async (req, res, next) => {
+exports.createProfile = catchAsync( async (req, res, next) => {
     sizeOf(req.files.profileImage.tempFilePath, async function (err, dimensions) {
         if (dimensions.width != dimensions.height && Math.abs(dimensions.height - dimensions.width) > 50) {
             req.flash('error', 'Please upload an image of almost equal dimension')
@@ -131,10 +132,10 @@ exports.createProfile = async (req, res, next) => {
         }
     });
     
-};
+})
 
 // // It can be used to update profile and also change users profile from pending to verified
-exports.updateProfile =  async(req, res)=>{
+exports.updateProfile =  catchAsync(async(req, res, next)=>{
     const updatedProfile = await Profile.findOneAndUpdate({user_id: req.params.id}, req.body, {new: true});
     if(!updatedProfile){
         req.flash('error', 'Something went wrong. Try again')
@@ -142,9 +143,9 @@ exports.updateProfile =  async(req, res)=>{
     }
     req.flash('success', 'Profile updated successfully')
     res.redirect(`/profile/${updatedProfile.user_id}`);
-};
+})
 
-exports.updateProfileImage = async (req, res) => {
+exports.updateProfileImage = catchAsync( async (req, res, next) => {
     sizeOf(req.files.profileImage.tempFilePath, async function (err, dimensions) {
         if (dimensions.width != dimensions.height && Math.abs(dimensions.height - dimensions.width) > 50) {
             req.flash('error', 'Please upload an image of almost equal dimension')
@@ -162,17 +163,24 @@ exports.updateProfileImage = async (req, res) => {
         
     });
     
-}
-// posting images of the farm
-// exports.updateFarmImage = async (req, res) => {
-//     const files = req.files
-//     for(const file of files){
-//         const result = await cloudinary.uploader.upload(req.file.path);
-//         const updateProfile = await Profile.findByIdAndUpdate({user_id: req.params.id}, {$push: {farmimage: {avatar:result.secure_url,cloundinary_id: result.public_id}}}, {new: true})
-//         if(!updateProfile){
-//             req.flash('error', 'Something went wrong. Try again')
-//             return res.redirect('back')
-//         }
-//         req.flash('success', 'Profile image updated successfully')
-//         res.redirect(`/profile/${user_id}`);
-//     }
+})
+
+
+
+exports.resetPassword = catchAsync(async (req, res, next) => {
+    const {currentPass, newPass, rnewPass } = req.body
+    if (newPass != rnewPass) {
+        req.flash("error", "Password mismatch")
+        return res.redirect("back")
+    }
+    const user = await User.findById(req.user._id)
+    user.changePassword(currentPass, newPass, (err) => {
+        if (err) {
+            req.flash("error", "Something went wrong.Please try again.")
+            return res.redirect("back")
+        }
+        req.flash('success', "Password changed successfully")
+        res.redirect(`/profile/${user._id}`)
+    })
+    
+})

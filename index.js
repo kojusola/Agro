@@ -74,7 +74,10 @@ app.use('/farmers', farmerRouter)
 app.use('/livechat', livechatRouter)
 app.use('/admin', adminRouter)
 
-
+app.all("*", async (req, res, next) => {
+	req.flash("error", "Url does not exist!!!")
+	res.redirect('/')
+})
 //database connection
 const db = require("./connection");
 db.db()
