@@ -2,20 +2,20 @@
 
 <section class="">
         <section class="row banner  ">
-            <div class=" banner-content col-md-7">
+            <div class=" banner-content col-md-8">
                 <h1>PUT YOUR LAND TO USE</h1>
-                <h3>SEASONED FARMERS AVALIABLE FOR SERVICE</h3>
+                <h3>SEASONED FARMERS AVAILABLE FOR SERVICE</h3>
             </div>
 
-            <div class=" banner-form col-md-5  ">
-                <form action="#" class="form  ">
+            <div class=" banner-form col-md-4  " id="banner-form">
+                <form action="/email" method="POST" class="form ">
                     <h2>CONTACT US</h2>
-                    <input class="input-alt" type="text" name="first_name" placeholder="FIRST NAME">
-                    <input class="input-alt" type="text" name="last_name" placeholder="LAST NAME">
-                    <input class="input-alt" type="email" name="email" placeholder="E-MAIL">
-                    <input class="input-alt" type="number" name="phone" placeholder="PHONE NUMBER">
-                    <textarea name="message" id="text-area" placeholder="  MESSAGE"></textarea>
-                    <button class="input-alt btn btn-lg btn-danger">SEND A MESSAGE</button>
+                    <input class="input-alt" class="form-control" type="text" name="first_name" placeholder="FIRST NAME" required>
+                    <input class="input-alt" class="form-control" type="text" name="last_name" placeholder="LAST NAME" required>
+                    <input class="input-alt" class="form-control" type="email" name="email" placeholder="E-MAIL" required>
+                    <input class="input-alt" class="form-control" type="number" name="phone" placeholder="PHONE NUMBER" required>
+                    <textarea name="message" class="px-1 form-control" id="text-area" rows="3" placeholder="  MESSAGE" required></textarea>
+                    <button type="submit" class="input-alt btn btn-lg btn-danger">SEND A MESSAGE</button>
                 </form>
             </div>
         </section>
@@ -90,7 +90,7 @@
                     investors with resourcesand vice versa. This will in turn ensure food availability in the country.
                 </blockquote>
                 <div class="contact-us-button ">
-                    <button class="btn btn-lg btn-danger">CONTACT US</button>
+                    <button class="btn btn-lg btn-danger" onclick="contactus()">CONTACT US</button>
                 </div>
                 
 
@@ -177,7 +177,7 @@
                     subsitence farming towards eradication of food scarcity in the country. 
                 </blockquote>
                 <div class="contact-us-button ">
-                    <button class="btn btn-lg btn-danger">CONTACT US</button>
+                    <button class="btn btn-lg btn-danger" onclick="contactus()">CONTACT US</button>
                 </div>
                 
 

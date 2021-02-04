@@ -74,7 +74,7 @@ html, body{
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 60%;
+    width: 80%;
     background-color: rgba(0, 0, 0, 0.65);
 }
 
@@ -217,6 +217,11 @@ html, body{
     align-items: center;
 }
 
+@media only screen and (max-width: 1000px){
+    #banner-form{
+        display: none;
+    }
+}
 /* .banner, .objectives, .obj-abt-content, .reviews-outer, .statement{
      margin: 15rem, 0; 
 } */

@@ -6,3 +6,8 @@ document.getElementById("profile").textContent = sub[0]
 function farmers() {
     location.href = '/farmers'
 }
+
+
+function contactus() {
+    location.href = '/email'
+}

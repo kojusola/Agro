@@ -60,7 +60,9 @@ app.use(function(req, res, next){
 	next();
 });
 
-
+app.get("/email", async (req, res) => {
+	return res.render("contactus.hbs")
+})
 app.post("/email", async (req, res) => {
     const msg = {
 		to: 'charlesugbana04@gmail.com',

@@ -28,6 +28,13 @@ body{
     border-radius: 18px;
     box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.19);
 }
+.border-round{
+    margin: 60px 50px;
+    border: 2px solid #6c757d;
+    padding: 10px 30px;
+    border-radius: 18px;
+    box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.19);
+}
 
 .signinform{
     margin: 160px auto;
