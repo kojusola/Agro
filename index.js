@@ -16,6 +16,7 @@ const MongoStore = require("connect-mongo")(session);
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.EMAIL_KEY);
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+const favicon = require('serve-favicon')
 
 
 const app = express();
@@ -28,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public/')))
 
 
 
-
+app.use(favicon(__dirname + '/favicon.ico'));
 app.use(fileUpload({
     useTempFiles : true,
     tempFileDir : '/tmp/'
@@ -66,7 +67,7 @@ app.post("/email", async (req, res) => {
     	from: 'developmenthub123@gmail.com',
     	subject: 'Someone reached out - AgroTech',
 		html: `<h4>Hello admin,</h4>
-		<p>You have a new message for an AgroTech user, <strong>${req.body.first-name} ${req.body.last-name}</strong></p> 
+		<p>You have a new message for an AgroTech user, <strong>${req.body.first_name} ${req.body.last_name}</strong></p> 
 		<p> Phone: ${req.body.phone}</p>
 		<p> Phone: ${req.body.email}</p>
 		<p> Message: ${req.body.message}</p>
