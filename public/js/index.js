@@ -9,5 +9,5 @@ function farmers() {
 
 
 function contactus() {
-    location.href = '/email'
+    location.href = '/contactus'
 }
