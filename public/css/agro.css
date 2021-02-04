@@ -1,7 +1,9 @@
 .support{
     border: 1px solid red;
 }
-
+html, body{
+    width: 100vw;
+}
 *{
     padding: 0;
     margin: 0;
@@ -35,13 +37,11 @@
 }
 
 .banner{
-    height: 60vh;
+    height: 65vh;
     background-image: url("../img/landfarm.jpg");
     background-position:bottom;
     background-size: auto;
     background-repeat: no-repeat;
-    margin: 1.5rem;
-    overflow: scroll;
 }
 
 .banner-content{
@@ -49,10 +49,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.banner-content h3, .banner-content h1{
-    width: 100%;
 }
 
 .banner-content h1{
@@ -80,10 +76,6 @@
     color: rgb(255, 255, 255);
 }
 
-textarea {
-    max-width: 80%;
-  }
-
 .objectives, .obj-abt-content, .reviews{
     display: flex;
     justify-content: center;
@@ -92,43 +84,22 @@ textarea {
     /* margin: 0.5rem 00; */
 }
 
-.objectives{
-    height: 50vh;
-     overflow: scroll;
-}
 
-.obj-abt-content{
-    height: 55vh;
-    width: 100%;
-    background-color: rgb(238, 238, 238);
-    margin: 1.5rem auto;
-    height: 55vh;
-}
 
 .reviews-outer{
     margin: 1.5rem auto;
 }
 
-.reviews{
-    height: 30vh;
-}
 
 .card-whole{
-    width: 30%;
-    height: 50%;
+    width: 20rem;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 1rem;
 }
 
-.card-body{
-    overflow: scroll;
-}
-
 .pic-whole{
-    width: 30%;
-    max-height: 38vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -148,16 +119,12 @@ textarea {
 
 .card-statement{
     width: 20rem;
-    height: 28vh;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 1rem;
 }
 
-.statement{
-    height: 50vh;
-}
 
 .contact-us-button, .obj-abt-main-content blockquote{
     margin: 0%;
@@ -168,8 +135,7 @@ textarea {
 }
 
 .obj-abt-main-content{
-    width: 45%;
-    height: 40vh;
+   
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -177,9 +143,9 @@ textarea {
     margin: 0 1rem;
 }
 
-.obj-abt-main-content h3, h4{
+.obj-abt-main-content h3{
     width: 100%;
-    float: left;
+   
 }
 
 .obj-abt-main-content button{
@@ -192,17 +158,15 @@ textarea {
     justify-content: flex-start;
 }
 
-.obj-img, .abt-img{
-    height: 40vh;
-    width: 40% ;
-    object-fit: cover;
-    object-position: center;
-}
+
 
 .pro-img{
-    max-height: 18vh;
     object-fit: cover;
     object-position: center;
+    height: 120px;
+}
+.obj-img,.abt-img{
+    height: 300px;
 }
 
 .obj-abt-main-content h4{
@@ -259,86 +223,3 @@ textarea {
 /* .banner, .objectives, .obj-abt-content, .reviews-outer, .statement{
      margin: 15rem, 0; 
 } */
-
-@media only screen and (max-width: 479px){
-    .banner-form{
-        display: none;
-    }
-
-    .banner-content{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .objectives{
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .card-whole{
-        width: 90%;
-        height: 30%;
-    }
-
-    .card-body{
-        width: 100%;
-        height: 30%;  
-    }
-
-    .card-whole .card-text{
-        display: none;
-    }
-
-    .obj-abt-content{
-        flex-direction: column;
-        height: 70vh;
-        overflow: scroll;
-    }
-    
-    .obj-img{
-        width: 100%;
-        object-fit: contain;
-        height: 40%;
-        margin-top: 3px;
-    }
-
-    .obj-title, .obj-abt-main-content h4{
-        margin: 1rem 0;
-        padding: 0;
-    }
-
-    .obj-abt-main-content{
-        height: 100%;
-        width: 100%;
-    }
-
-    .statement{
-        flex-direction: column;
-    }
-
-    .pic-whole{
-        width: 100%;
-
-    }
-
-    .overflow-1{
-        height: 50%;
-    }
-
-    .pic-obj{
-        height: fit-content;
-        overflow: scroll;
-    }
-}
-
-@media only screen and (max-width: 320px){
-    .obj-title-miss{
-        display: none;
-    }
-
-    .top-banner{
-        display: none;
-    }
-}
