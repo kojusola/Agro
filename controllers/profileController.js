@@ -13,7 +13,7 @@ exports.profileForm = catchAsync(async (req, res, next) => {
         req.flash('error', 'You have a profile already. Update your profile from account settings.')
         return res.redirect('back');
     }
-    res.render('profileForm.hbs')
+    res.render('profileForm.hbs', { 'title': 'User Profile | AGROTECH'})
 })
 
 exports.getOneProfile= catchAsync( async(req, res) =>{
@@ -22,7 +22,7 @@ exports.getOneProfile= catchAsync( async(req, res) =>{
         req.flash('error', 'Something went wrong. Try again')
         return res.redirect('back');
     }
-    return res.render('userSetting.hbs', {profile: userProfile})
+    return res.render('userSetting.hbs', {profile: userProfile, 'title': 'Profile | AGROTECH'})
 }
 )
 exports.retriveOneProfile= catchAsync(async(req, res) =>{

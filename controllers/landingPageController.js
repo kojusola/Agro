@@ -1,5 +1,5 @@
 const catchAsync = require("./../utils/catchAsync")
 
 exports.landPage = catchAsync(async(req, res, next) => {
-    res.render('agroindex')
+    res.render('agroindex', { 'title': 'Home | AGROTECH'})
 })

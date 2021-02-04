@@ -11,7 +11,7 @@ exports.userLoginForm =catchAsync(async (req, res, next) => {
         req.flash("error", "Already signed in!");
         return res.redirect("back")
     }
-    res.render('signin.hbs')
+    res.render('signin.hbs', { 'title': 'Login | AGROTECH'})
 })
 
 exports.userSignupForm = catchAsync(async (req, res, next) => {
@@ -19,7 +19,7 @@ exports.userSignupForm = catchAsync(async (req, res, next) => {
         req.flash("error", "Currently signed in. Please log out!");
         return res.redirect("back")
     }
-    res.render('signup.hbs')
+    res.render('signup.hbs', { 'title': 'Register | AGROTECH'})
 })
 
 
