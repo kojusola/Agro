@@ -2,7 +2,7 @@
     <div class="col-md-12" id="main">
         {{> nav}}
         <section class="farmerBanner">
-            <div class="bg">
+            <div class="bg" style="padding: 0 30px">
                 <div>
                     <h1>Meet a farmer today...</h1><br>
                     <div class="input-group mb-3">
@@ -284,5 +284,10 @@
             0 41.8px 33.4px rgba(0, 0, 0, 0.086),
             0 100px 80px rgba(0, 0, 0, 0.12);
         cursor: pointer;
+    }
+    @media only screen and (max-height: 750px){
+        #sideview{
+            overflow-y: scroll!important;
+        }
     }
 </style>

@@ -1,5 +1,5 @@
 {{> nav }}
-<main class="container mt-4">
+<main class="container mt-4 " style="overflow-x: scroll;">
     <div class="openbtw">
         <div class="flex-start" id="filter-cont">
             <input type="text" name="filter" placeholder="Filter by role | location | status" class="filter" onkeyup="taskFilter()">
@@ -82,6 +82,11 @@
     }
     *{
         font-size: small!important;
+    }
+    @media only screen and (max-width: 800px){
+        .filter{
+            width: 100%!important;
+        }
     }
 </style>
 
