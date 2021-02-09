@@ -10,12 +10,23 @@
             <div class=" banner-form col-md-4  " id="banner-form">
                 <form action="/contactus" method="POST" class="form ">
                     <h2>CONTACT US</h2>
-                    <input class="input-alt" class="form-control" type="text" name="first_name" placeholder="FIRST NAME" required>
-                    <input class="input-alt" class="form-control" type="text" name="last_name" placeholder="LAST NAME" required>
-                    <input class="input-alt" class="form-control" type="email" name="email" placeholder="E-MAIL" required>
-                    <input class="input-alt" class="form-control" type="tel" name="phone" placeholder="PHONE NUMBER" required>
-                    <textarea name="message" class="px-1 form-control" id="text-area" rows="3" placeholder="  MESSAGE" required></textarea>
-                    <button type="submit" class="input-alt btn btn-lg btn-danger">SEND A MESSAGE</button>
+                     <div class="form-row">
+                         <div class="col"><input class="input-alt w-100" class="form-control" type="text" name="first_name" placeholder="FIRST NAME" required></div>
+                     </div>
+                      <div class="form-row">
+                         <div class="col"><input class="input-alt w-100" class="form-control" type="text" name="last_name" placeholder="LAST NAME" required></div>
+                     </div>
+                      <div class="form-row">
+                         <div class="col"><input class="input-alt w-100" class="form-control" type="email" name="email" placeholder="E-MAIL" required></div>
+                     </div>
+                      <div class="form-row">
+                         <div class="col"><input class="input-alt w-100" class="form-control" type="tel" name="phone" placeholder="PHONE NUMBER" required></div>
+                     </div>
+                      <div class="form-row">
+                         <div class="col"><textarea name="message" class=" w-100 form-control" id="text-area" rows="3" placeholder="MESSAGE" required style="padding: 8px!important;"></textarea></div>
+                     </div>
+                     <div class="form-row"><button type="submit" class="btn-block w-100 btn btn-lg btn-danger">SEND A MESSAGE</button></div>
+                    
                 </form>
             </div>
         </section>
