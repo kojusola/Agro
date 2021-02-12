@@ -101,7 +101,7 @@
         profiles.forEach(function (profile) {
             let role = profile.children[2].textContent.toLowerCase();
             let ver = profile.children[3].textContent.toLowerCase();
-            let location = profile.children[4].textContent.toLowerCase();
+            let location = profile.children[5].textContent.toLowerCase();
             if (role.indexOf(filter) != -1 || ver.indexOf(filter) != -1 || location.indexOf(filter) != -1) {
                 profile.style.display = "table-row";
             } else {
