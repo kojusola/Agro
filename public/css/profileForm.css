@@ -11,6 +11,9 @@
     font-size: small !important;
     display: flex;
 }
+.space{
+    margin: 0 10px;
+}
 .farmimg{
     background-image: url('/img/Farms.png');
     background-repeat: no-repeat;

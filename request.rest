@@ -1,0 +1,66 @@
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "name":"Adeola",
+    "username": "adeola12@gmail.com",
+    "password": "bang",
+    "location": "lagos",
+    "address":"ipaja",
+    "birthday": "10/05/2020",
+    "country": "Nigeria",
+    "role": "farmer"
+}
+
+
+###
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "name":"Adeola",
+    "username": "adeola321@gmail.com",
+    "password": "bang",
+    "role": "farmer"
+}
+
+###
+
+
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "adeola321@gmail.com",
+    "password": "bang"
+}
+
+####
+
+GET http://localhost:3000/auth/logout
+
+###
+
+POST   http://localhost:3000/profile/60043c2a5d8d9f2a600f2510
+Content-Type: application/json
+
+{
+    "birthday": "12 may 2021",
+    "address": "Adegbayi",
+    "country": "Nigeria",
+    "phone": "0901156778818",
+    "interests": "farming",
+    "status": "verified"
+}
+
+
+
+
+####
+
+GET http://localhost:3000/profile
+
+###
+
+GET http://localhost:3000/profile/all
