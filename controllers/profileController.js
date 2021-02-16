@@ -16,15 +16,18 @@ exports.profileForm = catchAsync(async (req, res, next) => {
     res.render('profileForm.hbs', { 'title': 'User Profile | AGROTECH'})
 })
 
-exports.getOneProfile= catchAsync( async(req, res) =>{
-    const userProfile = await Profile.findOne({user_id: req.params.id});
-    if(userProfile.length == 0){
-        req.flash('error', 'Something went wrong. Try again')
-        return res.redirect('back');
-    }
+exports.getOneProfile=  async(req, res) =>{
+        const userProfile = await Profile.findOne({user_id: req.params.id});
+
+        if(!userProfile){
+            console.log("yess")
+            req.flash('error', 'Kindly complete your profile')
+            return res.redirect("/profile")
+        }
+      
     return res.render('userSetting.hbs', {profile: userProfile, 'title': 'Profile | AGROTECH'})
 }
-)
+
 exports.retriveOneProfile= catchAsync(async(req, res) =>{
     const userProfile = await Profile.findOne({user_id: req.params.id});
     if(userProfile.length == 0){
