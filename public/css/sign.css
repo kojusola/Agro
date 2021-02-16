@@ -136,7 +136,7 @@ body{
 
 @media screen and (max-width:1300px) and (min-width:600px){
     #signinimage {
-       height:0;
+       display: none;
     }
     .signinform{
         margin: 60px auto;
@@ -151,7 +151,7 @@ body{
 
 @media screen and (max-width:600px){
     #signinimage {
-        height: 0;
+        display: none;
     }
     .signinform{
         margin: 140px auto;
